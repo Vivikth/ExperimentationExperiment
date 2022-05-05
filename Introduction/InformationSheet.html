@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+       Participant Information Sheet
+{% endblock %}
+
+{% block content %}
+<p>
+    Please read through the participant information sheet below.
+    To open the participant information sheet in a new tab click <a href="{{static 'global/dummy.pdf'}}">here</a>.
+</p>
+
+  <iframe frameborder="0" scrolling="no"
+     width="946" height="700"
+     src="{{static 'global/dummy.pdf'}}">
+  </iframe>
+
+
+
+<h2>Written Consent</h2>
+    <p>I have read and understood the above Information Sheet you have given me about the research project, and I
+    have had any questions and concerns about the project addressed to my satisfaction.</p>
+
+{% formfields %}
+
+    {% next_button %}
+
+
+    <style>
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+.info-msg,
+.info-msg {
+  color: #059;
+  background-color: #BEF;
+}
+</style>
+
+{% endblock %}

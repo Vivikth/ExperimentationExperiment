@@ -1,0 +1,14 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+       Sona Identification Number
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.sona_id label="Please enter your Sona numeric ID code (found at the bottom of all emails sent to you by Sona systems)" %}
+
+
+    {% next_button %}
+{% endblock %}

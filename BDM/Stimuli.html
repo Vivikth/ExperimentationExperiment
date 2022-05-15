@@ -1,0 +1,83 @@
+
+{{ block title }}
+Switch-Point Questions (<span id="Qnumber"></span> of {{player.num_trials}})
+{{ endblock }}
+{{ block content }}
+<style>
+.divider{
+    width:5px;
+    height:10px;
+    display:inline-block;
+}
+</style>
+
+<p id="question"></p>
+
+
+<div>
+    <button type="button" onclick="sendClick(this)" value="A" style="margin:5px;">
+        <p id="optionA"> </p>
+    </button> <br>
+
+    <button type="button" onclick="sendClick(this)" value="B" style="margin:5px;">
+        <p id="optionB"> </p>
+    </button> <br>
+
+    <button type="button" onclick="sendClick(this)" value="C" style="margin:5px;">
+        <p id="optionC"> </p>
+    </button> <br>
+
+    <button type="button" onclick="sendClick(this)" value="D" style="margin:5px;">
+        <p id="optionD"> </p>
+    </button> <br>
+</div>
+
+<br>
+<br>
+<br>
+
+
+<input type="hidden" name="raw_responses" id="raw_responses">
+
+<script>
+
+    let responses = {}
+
+    let trialIndex = 0;
+    let trials = js_vars.trials;
+    document.getElementById("Qnumber").innerHTML = trialIndex + 1;
+
+
+    function updateUI() {
+        for (let item of ['question', 'optionA', 'optionB', 'optionC', 'optionD']) {
+            document.getElementById(item).innerText = trials[trialIndex][item];
+        }
+    }
+
+    function sendClick(btn) {
+        let trialId = trials[trialIndex].id;
+        if (responses[trialId] == null ) {
+            responses[trialId] = btn.value;
+        }
+
+        if (trials[trialIndex].solution === btn.value) {
+            trialIndex++;
+            if (trialIndex === trials.length) {
+                document.getElementById('raw_responses').value = JSON.stringify(responses)
+                document.getElementById('form').submit();
+            } else {
+                updateUI();
+                document.getElementById("Qnumber").innerHTML = trialIndex + 1;
+            }
+        } else {
+            window.alert("Your answer was incorrect. Please think carefully and try again.");
+        }
+    }
+    updateUI();
+</script>
+
+<h2> Switch-Point Procedure Information</h2>
+
+
+
+{{ endblock }}

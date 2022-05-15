@@ -5,11 +5,7 @@ The app that introduces subjects to the experiment
 """
 
 
-# Need to make a draft experiment structure, then can go from there (at least for initial bits).
-#    Introduction app (should include ethics approval - mobile check is unnecessary)
-#    BDM App
-#    Choices (Blunder, control)
-#    Demographic survey
+
 
 
 class C(BaseConstants):

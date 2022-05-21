@@ -1,0 +1,58 @@
+
+<!--<h2 id="TimerHead">Submit button will appear in  <span id="count"></span> seconds </h2>-->
+
+<div id="div1">
+    <p>
+    Note: You will have to click the next button to enter your switch-point.
+</p>
+
+</div>
+
+    <script>
+    </script>
+
+    <script type="text/javascript">
+window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);
+    </script>
+
+
+<!--&lt;!&ndash;To hide div&ndash;&gt;-->
+<!--  <script>-->
+<!--      $(document).ready(function () {-->
+<!--          // Hide the div-->
+<!--          $("#div1").hide();-->
+<!--          // Show the div after 20s-->
+<!--          $("#div1").delay(21000).fadeIn(100);-->
+<!--      });-->
+<!--  </script>-->
+
+<!--<script>-->
+<!--    window.onload = function(){-->
+
+<!--(function(){-->
+<!--  var counter = 21;-->
+
+<!--  setInterval(function() {-->
+<!--    counter&#45;&#45;;-->
+<!--    if (counter >= 0) {-->
+<!--      span = document.getElementById("count");-->
+<!--      span.innerHTML = counter;-->
+<!--    }-->
+<!--    else-->
+<!--      {-->
+<!--          document.getElementById("count").style.display = "none";-->
+
+<!--      }-->
+<!--    // Display 'counter' wherever you want to display it.-->
+<!--    if (counter === 0) {-->
+<!--        clearInterval(counter);-->
+<!--        $("#TimerHead").hide()-->
+<!--    }-->
+
+<!--  }, 1000);-->
+
+<!--})();-->
+
+<!--};-->
+
+<!--</script>-->

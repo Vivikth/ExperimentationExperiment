@@ -1,0 +1,24 @@
+{{ block title }}
+    {{ Constants.Stage_Title }}
+{{ endblock }}
+
+{{ block content }}
+
+<p>
+    In this stage of the experiment, I want to determine how much you value completing a task from each category. <br>
+    I'll use the switch-point procedure to determine how much you value each task based on its vague description. <br>
+    There is a <b>5%</b> chance that one of the switch-point procedure questions in this stage will be selected. <br>
+    I've put information about the switch-point procedure at the bottom of the page if you'd like to refer back to it. <br>
+    Press the next button to continue.
+</p>
+
+    {{ next_button }}
+
+<br>
+<br>
+
+<h2> Switch-Point Procedure Information</h2>
+
+{{ include 'BDM/BDM_Info_ShowHide.html' }}
+
+{{ endblock }}

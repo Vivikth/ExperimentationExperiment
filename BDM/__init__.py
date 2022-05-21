@@ -1,11 +1,11 @@
 from otree.api import *
-
+#  Need to transfer old app in.
 import settings
 from Global_Functions import read_csv
+from more_itertools import sort_together
 
 author = 'Vivikth'  # This app was based off questions_from_csv in Otree Snippets
 doc = """Introduces and tests subjects on BDM Procedure"""
-
 
 
 class C(BaseConstants):
@@ -40,7 +40,25 @@ class Player(BasePlayer):
     Q3_Correct = models.BooleanField()
     Q4_Correct = models.BooleanField()
     Q5_Correct = models.BooleanField()
-
+    # Fancy_Pizza_Value = models.FloatField(doc="Fancy_Pizza_Value", min=0, max=100,
+    #                                       label="Your switch point for the fancy pizza is:")
+    # Cheap_Pizza_Value = models.FloatField(doc="Cheap_Pizza_Value", min=0, max=100,
+    #                                       label="Your switch point for the cheap pizza task is:")
+    # Fancy_Taco_Value = models.FloatField(doc="Fancy_Taco_Value", min=0, max=100,
+    #                                      label="Your switch point for the fancy taco task is:")
+    # Cheap_Taco_Value = models.FloatField(doc="Cheap_Taco_Value", min=0, max=100,
+    #                                      label="Your switch point for the cheap taco task is:")
+    # Elicitation Variables
+    Tabulation_Value = models.FloatField(doc="Tabulation_Value", min=0, max=100,
+                                         label="Your switch point for the tabulation task is:")
+    Concealment_Value = models.FloatField(doc="Concealment_Value", min=0, max=100,
+                                          label="Your switch point for the concealment task is:")
+    Interpretation_Value = models.FloatField(doc="Interpretation_Value", min=0, max=100,
+                                             label="Your switch point for the interpretation task is:")
+    Replication_Value = models.FloatField(doc="Replication_Value", min=0, max=100,
+                                          label="Your switch point for the replication task is:")
+    Organisation_Value = models.FloatField(doc="Organisation_Value", min=0, max=100,
+                                           label="Your switch point for the organisation task is:")
 
 class Trial(ExtraModel):
     player = models.Link(Player)
@@ -54,6 +72,7 @@ class Trial(ExtraModel):
     choice = models.StringField()
     is_correct = models.BooleanField()
 
+
 def to_dict(trial: Trial):
     return dict(
         question=trial.question,
@@ -66,6 +85,13 @@ def to_dict(trial: Trial):
         solution=trial.solution
     )
 
+
+# Functions
+def get_nullable(obj, field_name):
+    try:
+        return getattr(obj, field_name)
+    except TypeError:
+        return None
 
 # PAGES
 class BDMIntro(Page):
@@ -112,5 +138,31 @@ class Stimuli(Page):
                 player.participant.Q5_Correct = player.Q5_Correct
 
 
+class ElicitIntro(Page):
+    form_model = 'player'
+    form_fields = ['Tabulation_Value', 'Concealment_Value', 'Replication_Value',
+                   'Interpretation_Value', 'Organisation_Value']
 
-page_sequence = [BDMIntro, Stimuli]
+    @staticmethod
+    def live_method(player, data):
+        if 'Tabulation_Value' in data:
+            player.Tabulation_Value = data['Tabulation_Value']
+        if 'Concealment_Value' in data:
+            player.Concealment_Value = data['Concealment_Value']
+        if 'Interpretation_Value' in data:
+            player.Interpretation_Value = data['Interpretation_Value']
+        if 'Replication_Value' in data:
+            player.Replication_Value = data['Replication_Value']
+        if 'Organisation_Value' in data:
+            player.Organisation_Value = data['Organisation_Value']
+
+        if all(get_nullable(player, value) is not None for value in ['Tabulation_Value', 'Concealment_Value',
+                                                                     'Replication_Value',
+                                                                     'Interpretation_Value', 'Organisation_Value']):
+            names = ['Tabulation', 'Concealment', 'Replication', 'Interpretation', 'Organisation']
+            values = [player.Tabulation_Value, player.Concealment_Value, player.Replication_Value,
+                      player.Interpretation_Value, player.Organisation_Value]
+            return {player.id_in_group: sort_together([values, names])[1][::-1]}
+
+
+page_sequence = [BDMIntro, Stimuli, ElicitIntro]

@@ -1,0 +1,41 @@
+<style>
+ h4, h5, h6, h7
+{
+font-weight: normal;
+}
+</style>
+
+
+<p>
+    In this stage of the experiment, I want to determine how much you value a task from each category. <br>
+    I'll use the switch-point procedure to determine how much you value each task based on its vague description. <br>
+    I've put information about the switch-point procedure at the bottom of the page if you'd like to refer back to it. <br>
+</p>
+<br>
+
+<h4> How much do you value completing the <b>{{Task_name}} (level 1)</b> task?</h4>
+<p>
+    This task is called <strong>{{Task_name}} (level 1)</strong>.<br>
+    The task description is: <strong> {{Task_description}}</strong>.  <br>
+</p>
+<p>
+    <b>Option A</b> means you complete this task, and then  get to leave the experiment (receiving full payment). <br>
+    <b>Option B</b> means you get a lottery with the following outcomes:
+</p>
+    <ul>
+    <li> Outcome 1: You get to leave the experiment right now (receiving full payment). </li>
+    <li> Outcome 2: You have to complete a reading activity, which involves reading some text and then correctly answering questions on this text. You then have to continue with the rest of the experiment.<br> I expect that the reading activity will take at least twice as much time as any of the level 1 tasks.</li>
+    </ul>
+<p>
+    I will ask you the following questions. <br>
+    Note: There is a <b>5%</b> chance that one of the questions in this stage will be selected.
+</p>
+<br>
+{{ include 'Task_WTP/Task_BDMQs.html' }}
+<br>
+<p>
+    To save time, I'll just ask you for your <b>switch-point</b>: the percentage chance of leaving at which you would switch from option A to option B. <br>
+    Please enter your answer as a percentage (i.e a number between 0 and 100). <br>
+</p>
+
+

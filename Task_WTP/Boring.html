@@ -1,0 +1,146 @@
+<style>
+.divider{
+    width:5px;
+    height:10px;
+    display:inline-block;
+}
+.word-foobar:before {
+    content: {{ include 'Task_WTP/BoringText.html'}};
+    white-space: pre-wrap;
+}
+
+</style>
+
+{{ block title }}
+Reading Activity Instructions
+{{ endblock }}
+{{ block content }}
+
+<p>
+    Read the most boring thing ever written, then answer the questions at the bottom of the page. <br>
+    The questions will only appear after 1 minute, and you must answer each question correctly to proceed. <br>
+    DO NOT reload the page, otherwise you will have to start again. <br>
+    The text has been made non-searchable, so you will have to read it carefully to answer the questions. <br>
+</p>
+
+<h2> The most boring thing ever written</h2>
+
+<div class="word-foobar">
+</div>
+
+<br> <br>
+
+<h2 id="TimerHead">Questions will appear in  <span id="count"></span> seconds </h2>
+
+<div id="div1">
+<h2>Questions (<span id="Q_number"></span> of 15)</h2>
+
+
+<p id="question"></p>
+
+
+<div>
+    <button type="button" onclick="sendClick(this)" value="A" style="margin:5px;">
+        <p id="optionA"> </p>
+    </button> <br>
+
+    <button type="button" onclick="sendClick(this)" value="B" style="margin:5px;">
+        <p id="optionB"> </p>
+    </button> <br>
+
+    <button type="button" onclick="sendClick(this)" value="C" style="margin:5px;">
+        <p id="optionC"> </p>
+    </button> <br>
+
+    <button type="button" onclick="sendClick(this)" value="D" style="margin:5px;">
+        <p id="optionD"> </p>
+    </button> <br>
+</div>
+
+<br>
+<br>
+<br>
+
+
+
+<input type="hidden" name="raw_responses" id="raw_responses">
+
+</div>
+
+<script>
+
+    let responses = {}
+
+    let trialIndex = 0;
+    let trials = js_vars.trials;
+    document.getElementById("Q_number").innerHTML = trialIndex + 1;
+
+
+    function updateUI() {
+        for (let item of ['question', 'optionA', 'optionB', 'optionC', 'optionD']) {
+            document.getElementById(item).innerText = trials[trialIndex][item];
+        }
+    }
+
+    function sendClick(btn) {
+        let trialId = trials[trialIndex].id;
+        responses[trialId] = btn.value;
+        if (trials[trialIndex].solution == responses[trialId]) {
+            trialIndex++;
+            if (trialIndex === trials.length) {
+                document.getElementById('raw_responses').value = JSON.stringify(responses)
+                document.getElementById('form').submit();
+            } else {
+                updateUI();
+                document.getElementById("Q_number").innerHTML = trialIndex + 1;
+            }
+        } else {
+            window.alert("Your answer was incorrect. Please try again.");
+        }
+    }
+    updateUI();
+</script>
+
+  <script>
+      $(document).ready(function () {
+          // Hide the div
+          $("#div1").hide();
+          // Show the div after 60s
+          $("#div1").delay(61000).fadeIn(100);
+      });
+  </script>
+
+<script>
+    window.onload = function(){
+
+(function(){
+  var counter = 60;
+
+  setInterval(function() {
+    counter--;
+    if (counter >= 0) {
+      span = document.getElementById("count");
+      span.innerHTML = counter;
+    }
+    else
+      {
+          document.getElementById("count").style.display = "none";
+
+      }
+    // Display 'counter' wherever you want to display it.
+    if (counter === 0) {
+        clearInterval(counter);
+        $("#TimerHead").hide()
+    }
+
+  }, 1000);
+
+})();
+
+};
+
+</script>
+
+
+
+{{ endblock }}

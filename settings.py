@@ -2,7 +2,8 @@ from os import environ
 
 # Need to make a draft experiment structure, then can go from there (at least for initial bits).
 #    Introduction app (should include ethics approval - mobile check is unnecessary) - TICK
-#    BDM App - Intro + Quiz Structure working; need to set up preference elicitation
+#    BDM App - Intro + Quiz Structure working; need to remove preference elicitation
+#    Task_WTP - need to setup
 #    Choices (Blunder, control)
 #    Demographic survey
 
@@ -18,6 +19,12 @@ SESSION_CONFIGS = [
         display_name='BDM',
         num_demo_participants=1,
         app_sequence=['BDM']
+    ),
+    dict(
+        name='Task_WTP',
+        display_name='Task_WTP',
+        num_demo_participants=1,
+        app_sequence=['Task_WTP']
     ),
 ]
 

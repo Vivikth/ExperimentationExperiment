@@ -16,65 +16,6 @@
 <br>
 
 
-<h3>Randomization Results</h3>
-
-
-    {{ if player.Rand_Outcome == "C" }}
-<p>
-    None of the switch-point questions were selected. <br>
-    Click the next button to proceed with the rest of the experiment.
-</p>
-    {{ endif }}
-
-    {{ if player.Rand_Outcome == "BW" }}
-<p>
-    One of the switch-point questions was selected. <br>
-    I randomly selected {{selected_task}} (level 1) as the task. <br>
-    I randomly selected question number {{player.BDM_Num}} as the question. <br>
-    Your switch-point for this task was {{ switch_point }}. <br>
-</p>
-<br>
-        {{if switch_point > player.BDM_Num}}
-    <p>
-        Your switch-point was higher than the selected question. <br>
-        This means you said that you prefer completing the {{selected_task}} (level 1) task to the lottery in that question <br>
-        Click the next button to complete the task. <br>
-    </p>
-        {{endif}}
-
-        {{if player.BDM_Num >= switch_point }}
-    <p>
-        Your switch-point was lower than the selected question. <br>
-        This means you said that you prefer the lottery to completing the {{selected_task}} (level 1) task. <br>
-    </p>
-
-
-
-                {{if player.lot_outcome < player.BDM_Num}}
-            <p>
-                The outcome of the lottery was the best task! <br>
-                This means you get to finish the experiment without completing any tasks. <br>
-                Press the next button to finish the experiment.
-            </p>
-            {{endif}}
-
-            {{if player.lot_outcome >= player.BDM_Num}}
-            <p>
-                The outcome of the lottery was the reading activity. <br>
-                Press the next button to complete the reading activity. <br>
-            </p>
-            {{endif}}
-
-    <br>
-        {{endif}}
-
-    {{ endif }}
-
-
-    {{ next_button }}
-
-<br>
-<br>
-
+<!--Had some stuff using randomisation results - will include later-->
 
 {{ endblock }}

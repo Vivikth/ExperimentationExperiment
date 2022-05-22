@@ -13,19 +13,14 @@ font-weight: normal;
 </p>
 <br>
 
-<h4> How much do you value completing the <b>{{Task_name}} (level 1)</b> task?</h4>
+<h4> How much do you value eating the <b>{{Task_name}}</b>?</h4>
 <p>
-    This task is called <strong>{{Task_name}} (level 1)</strong>.<br>
-    The task description is: <strong> {{Task_description}}</strong>.  <br>
+    The description is: <strong> {{Task_description}}</strong>.  <br>
 </p>
 <p>
-    <b>Option A</b> means you complete this task, and then  get to leave the experiment (receiving full payment). <br>
-    <b>Option B</b> means you get a lottery with the following outcomes:
+    <b>Option A</b> means you eat a sample of the {{Task_name}}, and then continue with the experiment. <br>
+    <b>Option B</b> means you get the money, and then continue with the experiment.
 </p>
-    <ul>
-    <li> Outcome 1: You get to leave the experiment right now (receiving full payment). </li>
-    <li> Outcome 2: You have to complete a reading activity, which involves reading some text and then correctly answering questions on this text. You then have to continue with the rest of the experiment.<br> I expect that the reading activity will take at least twice as much time as any of the level 1 tasks.</li>
-    </ul>
 <p>
     I will ask you the following questions. <br>
     Note: There is a <b>5%</b> chance that one of the questions in this stage will be selected.
@@ -34,8 +29,8 @@ font-weight: normal;
 {{ include 'Task_WTP/Task_BDMQs.html' }}
 <br>
 <p>
-    To save time, I'll just ask you for your <b>switch-point</b>: the percentage chance of leaving at which you would switch from option A to option B. <br>
-    Please enter your answer as a percentage (i.e a number between 0 and 100). <br>
+    To save time, I'll just ask you for your <b>switch-point</b>: the monetary amount at which you would switch from option A to option B. <br>
+    Please enter your answer as a number (i.e a number between 0.00 and 20.00). <br>
 </p>
 
 

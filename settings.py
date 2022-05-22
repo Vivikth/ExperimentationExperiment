@@ -39,8 +39,8 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks', 'time_taken',
                       'BDM_Score', 'Q1_Correct', 'Q2_Correct', 'Q3_Correct', 'Q4_Correct', 'Q5_Correct',  # BDM
-                      'Concealment_Value', 'Tabulation_Value', 'Interpretation_Value',  # Task_WTP
-                      'Replication_Value', 'Organisation_Value',
+                      'Fancy_Pizza_Value', 'Cheap_Pizza_Value', 'Fancy_Taco_Value',  # Task_WTP
+                      'Cheap_Taco_Value',
                       'pair1', 'pair2', 'sub_menu1', 'sub_menu2', 'path', 'rand_task',
                       'treatment_used1', 'treatment_used2', 'blunder_choice1', 'blunder_choice2',  # RET_Choice
                       'treatment_choice1', 'treatment_choice2', 'control_choice1', 'control_choice2',

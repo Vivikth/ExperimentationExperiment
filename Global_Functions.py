@@ -11,16 +11,14 @@ def read_csv(filename):
 
 def value_function(task, player):
     """Returns a player's stated valuation for a task."""
-    if task == 'T':
-        return player.Tabulation_Value
-    elif task == 'C':
-        return player.Concealment_Value
-    elif task == 'I':
-        return player.Interpretation_Value
-    elif task == 'R':
-        return player.Replication_Value
-    elif task == 'O':
-        return player.Organisation_Value
+    if task == 'Fancy Pizza':
+        return player.Fancy_Pizza_Value
+    elif task == 'Cheap Pizza':
+        return player.Cheap_Pizza_Value
+    elif task == 'Fancy Taco':
+        return player.Fancy_Taco_Value
+    elif task == 'Cheap Taco':
+        return player.Cheap_Taco_Value
     else:
         raise ValueError('Input must be first (capital) letter of a task name')
 

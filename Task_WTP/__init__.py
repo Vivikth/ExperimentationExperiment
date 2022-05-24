@@ -4,7 +4,7 @@ import time
 import settings
 from Global_Functions import read_csv, value_function, list_subtract, task_name_decoder, task_name
 from more_itertools import sort_together
-
+# BDM Randomisation values working; need to figure out how to generate pairs of foods.
 author = "Vivikth"
 doc = """ Determines subject's valuations for level-1 tasks """
 
@@ -27,21 +27,18 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     # Elicitation Variables
     Fancy_Pizza_Value = models.FloatField(doc="Fancy_Pizza_Value", min=0, max=100,
-                                          label="Your switch point for the fancy pizza is:")
+                                            label="Your switch point for the fancy pizza is:")
     Cheap_Pizza_Value = models.FloatField(doc="Cheap_Pizza_Value", min=0, max=100,
                                           label="Your switch point for the cheap pizza is:")
     Fancy_Taco_Value = models.FloatField(doc="Fancy_Taco_Value", min=0, max=100,
                                          label="Your switch point for the fancy taco is:")
     Cheap_Taco_Value = models.FloatField(doc="Cheap_Taco_Value", min=0, max=100,
                                          label="Your switch point for the cheap taco is:")
-    # Tabulation_Value = models.FloatField(doc="Tabulation_Value", min=0, max=100,
-    #                                      label="Your switch point for the tabulation task is:")
-    # Concealment_Value = models.FloatField(doc="Concealment_Value", min=0, max=100,
-    #                                       label="Your switch point for the concealment task is:")
-    # Interpretation_Value = models.FloatField(doc="Interpretation_Value", min=0, max=100,
-    #                                          label="Your switch point for the interpretation task is:")
-    # Replication_Value = models.FloatField(doc="Replication_Value", min=0, max=100,
-    #                                       label="Your switch point for the replication task is:")
+
+
+    Rand_T = models.StringField(choices=["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"])  # Foods
+    Rand_Outcome = models.StringField(choices=["BW", "C"])  # Best, Worst Continue
+    BDM_Num = models.IntegerField(min=1, max=2001)
 
 
 class Trial(ExtraModel):
@@ -99,40 +96,26 @@ def sub_control_menu_generator(input_task):
 
 
 def creating_session(subsession: Subsession):
-    pass
-    # for p in subsession.get_players():
-    #     # Boring Task Question Setup
-    #     stimuli = read_csv('Task_WTP/BoringQs.csv')
-    #     p.num_trials = len(stimuli)
-    #     p.num_correct = 0
-    #     for stim in stimuli:
-    #         Trial.create(player=p, **stim)
-    #
-    #     # Randomisation
-    #     if 'Rand_T' in p.session.config:  # Random Task to complete
-    #         p.Rand_T = p.session.config['Rand_T']
-    #     else:
-    #         p.Rand_T = random.choice(["T", "C", "I", "R", "O"])
-    #     p.participant.rand_task = p.Rand_T
-    #
-    #     # Generate continuation_rv to determine whether program should continue or do best / worst task
-    #     if 'continuation_rv' in p.session.config:
-    #         continuation_rv = p.session.config['continuation_rv']
-    #     else:
-    #         continuation_rv = random.random()
-    #
-    #     if continuation_rv <= 0.05:  # If best / worst task is selected
-    #         p.Rand_Outcome = "BW"
-    #         p.BDM_Num = random.randint(0, 100)  # BDM Question Number to select
-    #         if 'lot_outcome' in p.session.config:  # Result of Lottery between best and worst task.
-    #             p.lot_outcome = p.session.config['lot_outcome']
-    #         else:
-    #             p.lot_outcome = random.randint(0, 100)
-    #     else:
-    #         p.Rand_Outcome = "C"  # If best / worst task is not selected.
-    #         p.BDM_Num = 0         # These are placeholder values - they will never be accessed.
-    #         p.lot_outcome = 0
+    for p in subsession.get_players():
+        # Randomisation
+        if 'Rand_T' in p.session.config:  # Random Task to complete
+            p.Rand_T = p.session.config['Rand_T']
+        else:
+            p.Rand_T = random.choice(["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"])
+        p.participant.rand_task = p.Rand_T
 
+        # Generate continuation_rv to determine whether program should continue or do best / worst task
+        if 'continuation_rv' in p.session.config:
+            continuation_rv = p.session.config['continuation_rv']
+        else:
+            continuation_rv = random.random()
+
+        if continuation_rv <= 0.05:  # If BDM is to be implemented
+            p.Rand_Outcome = "Yes_BDM"
+            p.BDM_Num = random.randint(1, 2001)  # BDM Question Number to select
+        else:
+            p.Rand_Outcome = "No_BDM"  # If best / worst task is not selected.
+            p.BDM_Num = 0  # These are placeholder values - they will never be accessed.
 
 def get_nullable(obj, field_name):
     try:
@@ -170,7 +153,6 @@ class InstructionPage(Page):
                       player.Fancy_Taco_Value]
             return {player.id_in_group: sort_together([values, names])[1][::-1]}
 
-
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         player.participant.Fancy_Pizza_Value = player.Fancy_Pizza_Value
@@ -179,9 +161,7 @@ class InstructionPage(Page):
         player.participant.Cheap_Taco_Value = player.Cheap_Taco_Value
 
 
-
 class WtpConc(Page):
-    pass
     # @staticmethod
     # def before_next_page(player: Player, timeout_happened):
     #     player.participant.pair1, player.participant.pair2 = pair_generator(player, player.Rand_T)
@@ -213,18 +193,16 @@ class WtpConc(Page):
     #             else:  # Player gets worst task as lottery outcome
     #                 player.participant.path = "Worst"
 
-    # @staticmethod
-    # def vars_for_template(player: Player):
-    #     switch_point = value_function(player.Rand_T, player)
-    #     return {
-    #         'switch_point': switch_point,
-    #         'selected_task': task_name(player.Rand_T)
-    #     }
-
+    @staticmethod
+    def vars_for_template(player: Player):
+        switch_point = value_function(player.Rand_T, player)
+        return {
+            'switch_point': switch_point,
+            'selected_task': player.Rand_T
+        }
 
 
 page_sequence = [WtpIntro, InstructionPage, WtpConc]
-
 
 # def custom_export(players):
 #     yield ['participant_code', 'participant_label', 'session_label',

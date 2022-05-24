@@ -26,6 +26,14 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['Task_WTP']
     ),
+    dict(
+        name='Task_WTP2',
+        display_name='Task_WTP2',
+        num_demo_participants=1,
+        app_sequence=['Task_WTP'],
+        continuation_rv=0.01
+    ),
+
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

@@ -4,6 +4,7 @@ import time
 import settings
 from Global_Functions import read_csv, value_function, list_subtract, task_name_decoder, task_name
 from more_itertools import sort_together
+
 # BDM Randomisation values working; need to figure out how to generate pairs of foods.
 author = "Vivikth"
 doc = """ Determines subject's valuations for level-1 tasks """
@@ -27,14 +28,13 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     # Elicitation Variables
     Fancy_Pizza_Value = models.FloatField(doc="Fancy_Pizza_Value", min=0, max=100,
-                                            label="Your switch point for the fancy pizza is:")
+                                          label="Your switch point for the fancy pizza is:")
     Cheap_Pizza_Value = models.FloatField(doc="Cheap_Pizza_Value", min=0, max=100,
                                           label="Your switch point for the cheap pizza is:")
     Fancy_Taco_Value = models.FloatField(doc="Fancy_Taco_Value", min=0, max=100,
                                          label="Your switch point for the fancy taco is:")
     Cheap_Taco_Value = models.FloatField(doc="Cheap_Taco_Value", min=0, max=100,
                                          label="Your switch point for the cheap taco is:")
-
 
     Rand_T = models.StringField(choices=["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"])  # Foods
     Rand_Outcome = models.StringField(choices=["BW", "C"])  # Best, Worst Continue
@@ -67,9 +67,10 @@ def to_dict(trial: Trial):
 
 # FUNCTIONS
 def pair_generator(player: Player, exclude):
-    all_tasks = ['T', 'C', 'I', 'R', 'O']
-    ex_task = [exclude]
-    la = list_subtract(all_tasks, ex_task)
+    all_tasks = ["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"]
+
+    # ex_task = [exclude]
+    # la = list_subtract(all_tasks, ex_task)
 
     def reorder_pair(pair):
         if value_function(pair[0], player) >= value_function(pair[1], player):
@@ -77,9 +78,10 @@ def pair_generator(player: Player, exclude):
         else:
             return pair[::-1]
 
-    pair1 = reorder_pair(random.sample(la, 2))
-    new_list = list_subtract(la, pair1)
-    pair2 = reorder_pair(random.sample(new_list, 2))
+    pair1 = reorder_pair(random.sample(all_tasks, 2))
+    new_list = list_subtract(all_tasks, pair1)
+    pair2 = reorder_pair(random.sample(new_list, 2))  # I don't think the random sample is necessary; will keep
+    # unless it causes bugs.
 
     return pair1, pair2
 
@@ -116,6 +118,7 @@ def creating_session(subsession: Subsession):
         else:
             p.Rand_Outcome = "No_BDM"  # If best / worst task is not selected.
             p.BDM_Num = 0  # These are placeholder values - they will never be accessed.
+
 
 def get_nullable(obj, field_name):
     try:

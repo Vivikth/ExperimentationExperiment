@@ -1,3 +1,8 @@
+Binary_Choice_List = [
+            [False, 'No'],
+            [True, 'Yes'],
+        ]
+
 def read_csv(filename):
     """Reads a CSV in random order"""
     import csv

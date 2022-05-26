@@ -1,11 +1,9 @@
 from otree.api import *
+from Global_Functions import Binary_Choice_List
 
 doc = """
 The app that introduces subjects to the experiment
 """
-
-
-
 
 
 class C(BaseConstants):
@@ -35,6 +33,22 @@ class Player(BasePlayer):
     )
     name = models.StringField()
     date = models.StringField()
+    Tried_Fancy_Pizza = models.BooleanField(label='I have tried the fancy pizza before',
+                                            choices=Binary_Choice_List,
+                                            widget=widgets.RadioSelectHorizontal,
+                                            )
+    Tried_Cheap_Pizza = models.BooleanField(label='I have tried the cheap pizza before',
+                                            choices=Binary_Choice_List,
+                                            widget=widgets.RadioSelectHorizontal,
+                                            )
+    Tried_Fancy_Taco = models.BooleanField(label='I have tried the fancy taco before',
+                                           choices=Binary_Choice_List,
+                                           widget=widgets.RadioSelectHorizontal,
+                                           )
+    Tried_Cheap_Taco = models.BooleanField(label='I have tried the cheap taco before',
+                                           choices=Binary_Choice_List,
+                                           widget=widgets.RadioSelectHorizontal,
+                                           )
 
 
 # FUNCTIONS
@@ -65,4 +79,14 @@ class InformationSheet(Page):
     ]
 
 
-page_sequence = [SonaID, InformationSheet, Introduction]
+class TriedBefore(Page):
+    form_model = 'player'
+    form_fields = [
+        'Tried_Fancy_Pizza',
+        'Tried_Cheap_Pizza',
+        'Tried_Fancy_Taco',
+        'Tried_Cheap_Taco'
+    ]
+
+
+page_sequence = [SonaID, InformationSheet, Introduction, TriedBefore]

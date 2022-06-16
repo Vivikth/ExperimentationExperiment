@@ -2,10 +2,12 @@ from otree.api import *
 import random
 import time
 import settings
-from Global_Functions import read_csv, value_function, list_subtract, task_name_decoder, task_name
+from Global_Functions import read_csv, value_function, list_subtract, task_name_decoder, task_name, find_min_diff
 from more_itertools import sort_together
+import numpy as np
 
-# BDM Randomisation values working; need to figure out how to generate pairs of foods.
+# Make blunder menu options and control menu options.
+# Need to check creating_subsession & tidy up code & app & HTML. DO THIS, then move onto next app.
 author = "Vivikth"
 doc = """ Determines subject's valuations for level-1 tasks """
 
@@ -66,11 +68,12 @@ def to_dict(trial: Trial):
 
 
 # FUNCTIONS
-def pair_generator(player: Player, exclude):
+def pair_generator(player: Player):
     all_tasks = ["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"]
 
-    # ex_task = [exclude]
-    # la = list_subtract(all_tasks, ex_task)
+    participant = player.participant
+    task_info_status = [participant.tried_fancy_pizza, participant.tried_cheap_pizza, participant.tried_fancy_taco, participant.tried_cheap_taco]
+    not_tried_tasks = [task for task, tried in zip(all_tasks, task_info_status) if not tried]
 
     def reorder_pair(pair):
         if value_function(pair[0], player) >= value_function(pair[1], player):
@@ -78,23 +81,27 @@ def pair_generator(player: Player, exclude):
         else:
             return pair[::-1]
 
-    pair1 = reorder_pair(random.sample(all_tasks, 2))
-    new_list = list_subtract(all_tasks, pair1)
-    pair2 = reorder_pair(random.sample(new_list, 2))  # I don't think the random sample is necessary; will keep
-    # unless it causes bugs.
+
+    if len(not_tried_tasks) == 2:
+        participant.tried_ge_3 = 0
+        values = [value_function(task, player) for task in not_tried_tasks]
+        pair1 = [task for _, task in sorted(zip(values, all_tasks), reverse=True)]  # Untried (x,y) with v(x) >= v(y)
+        new_list = list_subtract(all_tasks, pair1)
+        pair2 = reorder_pair(random.sample(new_list, 2))
+    elif len(not_tried_tasks) > 2:
+        participant.tried_ge_3 = 0
+        values = [value_function(task, player) for task in not_tried_tasks]
+        diff, index1, index2 = find_min_diff(values, len(values))
+        pair1 = [all_tasks[index1], all_tasks[index2]]
+        new_list = list_subtract(all_tasks, pair1)
+        pair2 = reorder_pair(random.sample(new_list, 2))
+    else:
+        participant.tried_ge_3 = 1
+        pair1 = reorder_pair(random.sample(all_tasks, 2))
+        new_list = list_subtract(all_tasks, pair1)
+        pair2 = reorder_pair(random.sample(new_list, 2))
 
     return pair1, pair2
-
-
-def sub_control_menu_generator(input_task):
-    def all_levels(task):
-        return [(task_name(task), i) for i in range(2, 5)]
-
-    tuples_to_remove = all_levels(input_task)
-    all_tasks = all_levels('T') + all_levels('C') + all_levels('I') + all_levels('R') + all_levels('O')
-    tasks_to_choose = list_subtract(all_tasks, tuples_to_remove)
-    menu_options = random.sample(tasks_to_choose, 3)
-    return menu_options
 
 
 def creating_session(subsession: Subsession):
@@ -118,6 +125,11 @@ def creating_session(subsession: Subsession):
         else:
             p.Rand_Outcome = "No_BDM"  # If best / worst task is not selected.
             p.BDM_Num = 0  # These are placeholder values - they will never be accessed.
+        for tried in ['tried_fancy_pizza', 'tried_cheap_pizza', 'tried_fancy_taco', 'tried_cheap_taco']:
+            if tried in p.session.config:
+                p.participant.vars[tried] = p.session.config[tried]
+            else:
+                pass
 
 
 def get_nullable(obj, field_name):
@@ -165,13 +177,11 @@ class InstructionPage(Page):
 
 
 class WtpConc(Page):
-    # @staticmethod
-    # def before_next_page(player: Player, timeout_happened):
-    #     player.participant.pair1, player.participant.pair2 = pair_generator(player, player.Rand_T)
-    #     player.participant.pair = player.participant.pair1
-    #     player.participant.sub_menu1 = sub_control_menu_generator(player.participant.pair1[1])
-    #     player.participant.sub_menu2 = sub_control_menu_generator(player.participant.pair2[1])
-
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.participant.pair1, player.participant.pair2 = pair_generator(player)
+        print(player.participant.pair1)
+        print(player.participant.pair2)
     # @staticmethod
     # def app_after_this_page(player: Player, upcoming_apps):
     #     if player.Rand_Outcome == "C":  # Continue with experiment without best or worst task.

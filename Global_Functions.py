@@ -1,7 +1,8 @@
 Binary_Choice_List = [
-            [False, 'No'],
-            [True, 'Yes'],
-        ]
+    [False, 'No'],
+    [True, 'Yes'],
+]
+
 
 def read_csv(filename):
     """Reads a CSV in random order"""
@@ -31,6 +32,28 @@ def value_function(task, player):
 def list_subtract(first_list, second_list):
     """Set-difference, but for lists"""
     return list(set(first_list) - set(second_list))
+
+
+def find_min_diff(arr, n):
+    """Finds the minimum difference (and inducing indices) in a list"""
+    # Initialize difference as infinite, indexes to stop pycharm yelling
+    diff = 10 ** 20
+    index1 = 0
+    index2 = 0
+    # Find the min diff by comparing difference
+    # of all possible pairs in given array
+    for i in range(n - 1):
+        for j in range(i + 1, n):
+            if abs(arr[i] - arr[j]) < diff:
+                diff = abs(arr[i] - arr[j])
+                if arr[i] >= arr[j]:
+                    index1 = i
+                    index2 = j
+                else:
+                    index1 = j
+                    index2 = i
+                # Return min diff
+    return diff, index1, index2
 
 
 def task_name_decoder(string):
@@ -103,6 +126,7 @@ global_cases_dict = {'detect_mobile': ['non_mobile'],
                      'Exp_Prob': [[0.3, 0.5, 0.1, 0.1]],  # [(O1,O1), (O1,O2), (O2, O1), (O2,O2)]
                      'tremble_prob': [0.05]}
 
+
 # global_cases_dict = {'detect_mobile': ['non_mobile', 'mobile'],  # Full version
 #                      'Ethics_Consent': ['Consent', 'No_Consent'],
 #                      'Introduction': ['all_correct', 'incorrect'],
@@ -110,7 +134,6 @@ global_cases_dict = {'detect_mobile': ['non_mobile'],
 #                      'Task_WTP': ['random'],
 #                      'Exp_Prob': [[0.3, 0.5, 0.1, 0.1]],  # [(O1,O1), (O1,O2), (O2, O1), (O2,O2)]
 #                      'tremble_prob': [0.05]}
-
 
 
 def dict_product(dicts):

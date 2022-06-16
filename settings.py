@@ -3,7 +3,7 @@ from os import environ
 # Need to make a draft experiment structure, then can go from there (at least for initial bits).
 #    Introduction app (should include ethics approval - mobile check is unnecessary) - TICK
 #    BDM App - Intro + Quiz Structure working; need to remove preference elicitation
-#    Task_WTP - need to setup
+#    Task_WTP - need to set up
 #    Choices (Blunder, control)
 #    Demographic survey
 
@@ -31,7 +31,11 @@ SESSION_CONFIGS = [
         display_name='Task_WTP2',
         num_demo_participants=1,
         app_sequence=['Task_WTP'],
-        continuation_rv=0.01
+        continuation_rv=0.01,
+        tried_fancy_pizza=False,
+        tried_cheap_pizza=False,
+        tried_fancy_taco=False,
+        tried_cheap_taco=False
     ),
 
 ]
@@ -46,7 +50,8 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks', 'time_taken',
-                      'tried_fancy_pizza', 'tried_cheap_pizza', 'tried_fancy_taco', 'tried_cheap_taco', # Tried before variables
+                      'tried_fancy_pizza', 'tried_cheap_pizza', 'tried_fancy_taco', 'tried_cheap_taco', 'tried_ge_3',
+                      # Tried before variables
                       'BDM_Score', 'Q1_Correct', 'Q2_Correct', 'Q3_Correct', 'Q4_Correct', 'Q5_Correct',  # BDM
                       'Fancy_Pizza_Value', 'Cheap_Pizza_Value', 'Fancy_Taco_Value',  # Task_WTP
                       'Cheap_Taco_Value',

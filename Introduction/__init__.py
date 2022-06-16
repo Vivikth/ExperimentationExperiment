@@ -33,6 +33,7 @@ class Player(BasePlayer):
     )
     name = models.StringField()
     date = models.StringField()
+    # The following are tried before. Do we need to ensure incentive compatibility? HOW?
     Tried_Fancy_Pizza = models.BooleanField(label='I have tried the fancy pizza before',
                                             choices=Binary_Choice_List,
                                             widget=widgets.RadioSelectHorizontal,
@@ -87,6 +88,13 @@ class TriedBefore(Page):
         'Tried_Fancy_Taco',
         'Tried_Cheap_Taco'
     ]
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.participant.tried_fancy_pizza = player.Tried_Fancy_Pizza
+        player.participant.tried_cheap_pizza = player.Tried_Cheap_Pizza
+        player.participant.tried_fancy_taco  = player.Tried_Fancy_Taco
+        player.participant.tried_cheap_taco  = player.Tried_Cheap_Taco
 
 
 page_sequence = [SonaID, InformationSheet, Introduction, TriedBefore]

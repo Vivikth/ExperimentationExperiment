@@ -182,7 +182,7 @@ def bot_should_play_app(self, app):
     if 'task' in app:
         return bot_should_play_app(self, 'BDM')
     if 'RET' in app:
-        if 'path' not in self.player.participant.vars:  # Depends if we want to test RET_Choice alone or not
+        if 'path' not in self.player.participant.vars:  # Depends if we want to test Choice alone or not
             return bot_should_play_app(self, 'BDM')
         else:
             return bot_should_play_app(self, 'BDM') and \

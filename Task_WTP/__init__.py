@@ -2,12 +2,11 @@ from otree.api import *
 import random
 import time
 import settings
-from Global_Functions import read_csv, value_function, list_subtract, task_name_decoder, task_name, find_min_diff
+from Global_Functions import value_function, list_subtract, find_min_diff
 from more_itertools import sort_together
-import numpy as np
 
 # Make blunder menu options and control menu options.
-# Need to check creating_subsession & tidy up code & app & HTML. DO THIS, then move onto next app.
+# Need to check HTML (Task_WTP & BDM). DO THIS, then move onto next app.
 author = "Vivikth"
 doc = """ Determines subject's valuations for level-1 tasks """
 
@@ -55,24 +54,13 @@ class Trial(ExtraModel):
     is_correct = models.BooleanField()
 
 
-def to_dict(trial: Trial):
-    return dict(
-        question=trial.question,
-        optionA=trial.optionA,
-        optionB=trial.optionB,
-        optionC=trial.optionC,
-        optionD=trial.optionD,
-        id=trial.id,
-        solution=trial.solution
-    )
-
-
 # FUNCTIONS
 def pair_generator(player: Player):
     all_tasks = ["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"]
 
     participant = player.participant
-    task_info_status = [participant.tried_fancy_pizza, participant.tried_cheap_pizza, participant.tried_fancy_taco, participant.tried_cheap_taco]
+    task_info_status = [participant.tried_fancy_pizza, participant.tried_cheap_pizza, participant.tried_fancy_taco,
+                        participant.tried_cheap_taco]
     not_tried_tasks = [task for task, tried in zip(all_tasks, task_info_status) if not tried]
 
     def reorder_pair(pair):
@@ -92,7 +80,7 @@ def pair_generator(player: Player):
         participant.tried_ge_3 = 0
         values = [value_function(task, player) for task in not_tried_tasks]
         diff, index1, index2 = find_min_diff(values, len(values))
-        pair1 = [all_tasks[index1], all_tasks[index2]]
+        pair1 = reorder_pair([all_tasks[index1], all_tasks[index2]])  # Untried (x,y) with v(x) >= v(y)
         new_list = list_subtract(all_tasks, pair1)
         pair2 = reorder_pair(random.sample(new_list, 2))
     else:
@@ -186,7 +174,7 @@ class WtpConc(Page):
     # def app_after_this_page(player: Player, upcoming_apps):
     #     if player.Rand_Outcome == "C":  # Continue with experiment without best or worst task.
     #         player.participant.path = "Regular"
-    #         return 'RET_Choice'
+    #         return 'Choice'
     #     elif player.Rand_Outcome == "BW":
     #         # print("value is ", value_function(player.Rand_T, player), )
     #         # print("BDM Num is ", player.BDM_Num)

@@ -1,0 +1,27 @@
+<p>
+    Complete the <strong>{{Good_Task}} (level 1)</strong> task. <br>
+    After completing the <strong>{{Good_Task}} (level 1)</strong> task, you must complete <strong>one</strong> of the following tasks:
+</p>
+
+{{ if control }}
+    {{ if stage_for_template == '1st' }}
+   <ul>
+        <li>{{ player.participant.sub_menu1.0.0 }} (level {{ player.participant.sub_menu1.0.1 }})</li>
+        <li>{{ player.participant.sub_menu1.1.0 }} (level {{ player.participant.sub_menu1.1.1 }})</li>
+        <li>{{ player.participant.sub_menu1.2.0 }} (level {{ player.participant.sub_menu1.2.1 }})</li>
+    </ul>
+    {{ else }}
+   <ul>
+        <li>{{ player.participant.sub_menu2.0.0 }} (level {{ player.participant.sub_menu2.0.1 }})</li>
+        <li>{{ player.participant.sub_menu2.1.0 }} (level {{ player.participant.sub_menu2.1.1 }})</li>
+        <li>{{ player.participant.sub_menu2.2.0 }} (level {{ player.participant.sub_menu2.2.1 }})</li>
+    </ul>
+    {{ endif }}
+
+{{ else }}
+    <ul>
+        <li>{{Bad_Task}} (level 2)</li>
+        <li>{{Bad_Task}} (level 3)</li>
+        <li>{{Bad_Task}} (level 4)</li>
+    </ul>
+{{ endif }}

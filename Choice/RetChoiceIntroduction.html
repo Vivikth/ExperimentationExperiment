@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Choose tasks to complete
+{% endblock %}
+
+{% block content %}
+<p>
+    In this stage of the experiment, you will choose some tasks to complete. <br>
+    Instead of selecting tasks directly, you will have to choose <b>task-list pairs.</b> <br>
+</p>
+
+<h4>What are task-list pairs?</h4>
+<p>
+    A task-list pair consists of a single task, and a list of tasks. <br>
+    To complete a task-list pair, you must first complete the single task. <br>
+    You may receive some additional information after completing this single task. <br>
+    After completing the single task, you will choose a task from the list and complete that task. <br>
+</p>
+
+<h4>What you need to do</h4>
+
+
+
+<p>
+    You will need to choose 6 task-list pairs. <br>
+    This will consist of choosing 3 version A task-list pairs, and 3 version B task-list pairs. <br>
+    I will randomly select one version A task-list pair, and one version B task-list pair for you to complete.
+    The full timeline of events is shown below. <br>
+</p>
+<br>
+
+
+<p>
+    Remember, the choices you make now could <b>significantly affect</b> the time it takes for you to complete the experiment! <br>
+    Click the next button to choose your task-list pairs. <br>
+</p>
+    {% next_button %}
+
+
+
+
+{% endblock %}

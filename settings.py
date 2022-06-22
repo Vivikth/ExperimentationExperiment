@@ -37,6 +37,14 @@ SESSION_CONFIGS = [
         tried_fancy_taco=False,
         tried_cheap_taco=False
     ),
+    dict(
+        name='Choice',
+        display_name='Choice',
+        num_demo_participants=1,
+        app_sequence=['Choice'],
+        pair1=["Fancy Pizza", "Cheap Taco"],
+        pair2=["Fancy Taco", "Cheap Pizza"],
+    )
 
 ]
 
@@ -56,7 +64,7 @@ PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks'
                       'Fancy_Pizza_Value', 'Cheap_Pizza_Value', 'Fancy_Taco_Value',  # Task_WTP
                       'Cheap_Taco_Value',
                       'pair1', 'pair2', 'sub_menu1', 'sub_menu2', 'path', 'rand_task',
-                      'treatment_used1', 'treatment_used2', 'blunder_choice1', 'blunder_choice2',  # RET_Choice
+                      'treatment_used1', 'treatment_used2', 'blunder_choice1', 'blunder_choice2',  # Choice
                       'treatment_choice1', 'treatment_choice2', 'control_choice1', 'control_choice2',
                       'switched1', 'switched2',
                       'menu_choice1', 'menu_choice2',  # Menu_Select

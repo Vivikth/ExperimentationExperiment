@@ -1,0 +1,11 @@
+<div class = "opt1">
+    {{ if player.participant.treatment == 'Substitution' }}
+    {{ include 'RET_Choice/Substitution_Opt1.html'}}
+    {{ endif }}
+    {{ if player.participant.treatment == 'Post_Information' }}
+    {{ include 'RET_Choice/Post_Opt1.html'}}
+    {{ endif }}
+    {{ if player.participant.treatment == 'Pre_Information' }}
+    {{ include 'RET_Choice/Pre_Opt1.html'}}
+    {{ endif }}
+</div>

@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Choose Tasks to Complete
+{% endblock %}
+
+{% block content %}
+
+
+
+<p> Thank you for choosing the task-list pairs that you want to complete. <br>
+    Click the next button to complete the first task in your first task-list pair. <br>
+</p>
+<br>
+    {% next_button %}
+
+
+{% endblock %}

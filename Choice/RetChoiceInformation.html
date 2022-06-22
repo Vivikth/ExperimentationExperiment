@@ -1,0 +1,72 @@
+
+<details>
+    <summary><b style="color: red; font-size:25px">Click here to show/hide detailed information about {{Task_Info}} (level 1). </b></summary>
+
+    {{ if Task_Info == 'Tabulation' }}
+In the tabulation (level 1) task, you will count the number of zeros in a grid containing only 0s and 1s. <br>
+There will be no time limit, and you will have to count the number of zeros 10 times. <br>
+A screenshot of the task instructions, and an example of the task are given below. <br>
+
+<br>
+    <img src="{{ static '/tabulation/Sample_Instructions.PNG'}}">
+<br>
+<br>
+<img src="{{ static '/tabulation/Example_Image.PNG'}}">
+
+{{ endif }}
+
+    {{ if Task_Info == 'Replication' }}
+In the replication (level 1) task, you type a string containing the letters a,b,c,d,e,f. <br>
+There will be no time limit, and you will have to type 10 strings. <br>
+A screenshot of the task instructions, and an example of the task are given below. <br>
+
+<br>
+    <img src="{{ static '/replication/Sample_Instructions.PNG'}}">
+<br>
+<br>
+<img src="{{ static '/replication/Example_Image.PNG'}}">
+
+{{ endif }}
+
+    {{ if Task_Info == 'Concealment' }}
+In the concealment (level 1) task, you encode a string containing the letters a,b,c,d,e,f. <br>
+There will be no time limit, and you will have to encode 10 strings. <br>
+A screenshot of the task instructions, and an example of the task are given below. <br>
+
+<br>
+    <img src="{{ static '/encoding/Sample_Instructions.PNG'}}">
+<br>
+<br>
+<img src="{{ static '/encoding/Example_Image.PNG'}}">
+
+{{ endif }}
+
+        {{ if Task_Info == 'Organisation' }}
+In the organisation (level 1) task, you rearrange a string containing the letters a,b,c,d,e,f into alphabetical order. <br>
+There will be no time limit, and you will have to rearrange 10 strings. <br>
+A screenshot of the task instructions, and an example of the task are given below. <br>
+
+<br>
+    <img src="{{ static '/organising/Sample_Instructions.PNG'}}">
+<br>
+<br>
+<img src="{{ static '/organising/Example_Image.PNG'}}">
+
+{{ endif }}
+
+            {{ if Task_Info == 'Interpretation' }}
+In the interpretation (level 1) task, you will identify a blurry and moving digit. <br>
+There will be no time limit, and you will have to rearrange 10 strings. <br>
+A screenshot of the task instructions, and an example of the task are given below. <br>
+
+<br>
+    <img src="{{ static '/transcribing/Sample_Instructions.PNG'}}">
+<br>
+<br>
+<img src="{{ static '/transcribing/Example_Image.PNG'}}">
+
+{{ endif }}
+
+</details>
+
+

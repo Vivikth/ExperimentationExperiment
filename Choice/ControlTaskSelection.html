@@ -1,0 +1,93 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+<style>
+
+div.remind {
+  border: 3px dashed blue;
+  text-align: center;
+}
+div.opt1 {
+  border: 2px solid black;
+  text-align: center;
+}
+
+div.opt2 {
+  border: 2px solid black;
+  text-align: center;
+}
+
+ul { display: inline-block; text-align: left; }
+
+
+
+</style>
+
+
+{% block title %}
+    Choose a task-list pair (Version {{ version_for_template }})
+{% endblock %}
+
+{% block content %}
+
+<div class = "remind">
+    <h3>Reminder</h3>
+
+<p> In this stage of the experiment, you need to select a task-list pair. <br>
+    There is a <b>1 in 3</b> (approximately 33%) chance  that you will have to complete the task-list pair you choose on this page. <br>
+    Please think carefully about your choice, as it could <b>significantly affect</b> the time it takes for you to complete the experiment.
+</p>
+</div>
+
+<br>
+
+<p>
+    You must pick one of the following options:
+</p>
+
+
+<div class = "opt1">
+    <h4>Option 1</h4>
+    {{ if player.participant.treatment == 'Substitution' }}
+    {{ include 'RET_Choice/Substitution_Opt1.html'}}
+{{ endif }}
+{{ if player.participant.treatment == 'Post_Information' }}
+    {{ include 'RET_Choice/Post_Opt1.html'}}
+{{ endif }}
+{{ if player.participant.treatment == 'Pre_Information' }}
+    {{ include 'RET_Choice/Pre_Opt1.html'}}
+{{ endif }}
+</div>
+
+<br>
+<div class = "opt2">
+    <h4>Option 2</h4>
+{{ if player.participant.treatment == 'Substitution' }}
+    {{ include 'RET_Choice/Substitution_Opt2.html'}}
+{{ endif }}
+{{ if player.participant.treatment == 'Post_Information' }}
+    {{ include 'RET_Choice/Post_Opt2.html'}}
+{{ endif }}
+{{ if player.participant.treatment == 'Pre_Information' }}
+    {{ include 'RET_Choice/Pre_Opt2.html'}}
+{{ endif }}
+</div>
+
+<br>
+<p>
+</p>
+    {% formfield player.Control_Task_Choice label="Please select one of the above options"
+%}
+
+
+
+    {% next_button %}
+
+<details>
+    <summary>Click here if you'd like to see the task descriptions.</summary>
+    {{ include 'RET_Choice/Task_Descriptions.html'}}
+
+</details>
+
+
+{% endblock %}

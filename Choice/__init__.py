@@ -84,18 +84,11 @@ class BlunderTaskSelection(Page):
     @staticmethod
     def vars_for_template(player: Player):
         all_tasks = ["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"]
-        if 'stage' not in player.participant.vars:
-            stage_for_template = "1st"
-            version_for_template = "A"
-            good_task = player.participant.pair1[0]
-            bad_task = player.participant.pair1[1]
-            remaining_tasks = list_subtract(all_tasks, [good_task, bad_task])
-        else:
-            stage_for_template = "2nd"
-            version_for_template = "B"
-            good_task = player.participant.pair2[0]
-            bad_task = player.participant.pair2[1]
-            remaining_tasks = list_subtract(all_tasks, [good_task, bad_task])
+        stage_for_template = "1st"
+        version_for_template = "A"
+        good_task = player.participant.pair1[0]
+        bad_task = player.participant.pair1[1]
+        remaining_tasks = list_subtract(all_tasks, [good_task, bad_task])
         return {
             'Good_Task': good_task,
             'Bad_Task': bad_task,
@@ -111,25 +104,16 @@ class ControlTaskSelection(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        control = True
-        if 'stage' not in player.participant.vars:
-            stage_for_template = "1st"
-            version_for_template = "A"
-            good_task = task_name(player.participant.pair1[0])
-            bad_task = task_name(player.participant.pair1[1])
-            task_info = task_name(player.participant.pair1[0])
-        else:
-            stage_for_template = "2nd"
-            version_for_template = "B"
-            good_task = task_name(player.participant.pair2[0])
-            bad_task = task_name(player.participant.pair2[1])
-            task_info = task_name(player.participant.pair2[0])
+        stage_for_template = "1st"
+        version_for_template = "A"
+        good_task = player.participant.pair1[0]
+        bad_task = player.participant.pair1[1]
+        task_info = player.participant.pair1[0]
         return {
             'Good_Task': good_task,
             'Bad_Task': bad_task,
             'stage_for_template': stage_for_template,
             'Task_Info': task_info,
-            'control': control,
             'version_for_template': version_for_template
         }
 
@@ -138,81 +122,64 @@ class RandomPick(Page):
     @staticmethod
     def vars_for_template(player: Player):
         all_tasks = ['Tabulation', 'Concealment', 'Interpretation', 'Replication', 'Organisation']
-        if 'opt_choice2' not in player.participant.vars:
-            stage_for_template = "1st"
-            version_for_template = "A"
-            good_task = task_name(player.participant.pair1[0])
-            bad_task = task_name(player.participant.pair1[1])
-            task_info = task_name(player.participant.pair1[0])
-            if player.participant.treatment_used1 == "Treatment":
-                treatment_template = "2nd"
-            else:
-                treatment_template = "1st"
-            remaining_tasks = list_subtract(all_tasks, [good_task, bad_task])
-        else:
-            stage_for_template = "2nd"
-            version_for_template = "B"
-            good_task = task_name(player.participant.pair2[0])
-            bad_task = task_name(player.participant.pair2[1])
-            task_info = task_name(player.participant.pair2[0])
-            if player.participant.treatment_used2 == "Treatment":
-                treatment_template = "2nd"
-            else:
-                treatment_template = "1st"
-            remaining_tasks = list_subtract(all_tasks, [good_task, bad_task])
+        stage_for_template = "1st"
+        version_for_template = "A"
+        good_task = player.participant.pair1[0]
+        bad_task = player.participant.pair1[1]
+        task_info = player.participant.pair1[0]
+        remaining_tasks = list_subtract(all_tasks, [good_task, bad_task])
         return {
             'Good_Task': good_task,
             'Bad_Task': bad_task,
             'stage_for_template': stage_for_template,
             'Task_Info': task_info,
             'version_for_template': version_for_template,
-            'treatment_template': treatment_template,
             'remaining_tasks': remaining_tasks
         }
 
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        if player.Task_Choice == player.Control_Task_Choice:
-            player.Treatment_Caused_Switch = False
-        else:
-            player.Treatment_Caused_Switch = True
-        if 'opt_choice2' not in player.participant.vars:
-            player.participant.switched1 = player.Treatment_Caused_Switch
-        else:
-            player.participant.switched2 = player.Treatment_Caused_Switch
+    # @staticmethod
+    # def before_next_page(player: Player, timeout_happened):
+    #     if player.Task_Choice == player.Control_Task_Choice:
+    #         player.Treatment_Caused_Switch = False
+    #     else:
+    #         player.Treatment_Caused_Switch = True
+    #     if 'opt_choice2' not in player.participant.vars:
+    #         player.participant.switched1 = player.Treatment_Caused_Switch
+    #     else:
+    #         player.participant.switched2 = player.Treatment_Caused_Switch
 
-    @staticmethod
-    def app_after_this_page(player: Player, upcoming_apps):
-        opt_choice1 = player.participant.opt_choice1
-        # print(Constants.name_in_url)
-        # print('opt_choice2' in player.participant.vars)
-        if 'opt_choice2' in player.participant.vars:
-            player.participant.time_before_tasks = time.time()
-            player.participant.task_to_complete = task_name_decoder(task_name(player.participant.pair[opt_choice1])) \
-                                                  + player.participant.stage
-            return task_name_decoder(task_name(player.participant.pair[opt_choice1])) + player.participant.stage
+    # @staticmethod
+    # def app_after_this_page(player: Player, upcoming_apps):
+    #     opt_choice1 = player.participant.opt_choice1
+    #     # print(Constants.name_in_url)
+    #     # print('opt_choice2' in player.participant.vars)
+    #     if 'opt_choice2' in player.participant.vars:
+    #         player.participant.time_before_tasks = time.time()
+    #         player.participant.task_to_complete = task_name_decoder(task_name(player.participant.pair[opt_choice1])) \
+    #                                               + player.participant.stage
+    #         return task_name_decoder(task_name(player.participant.pair[opt_choice1])) + player.participant.stage
 
 
 page_sequence = [RetChoiceIntroduction, BlunderTaskSelection, ControlTaskSelection, RandomPick]
 
 
-def custom_export(players):
-    yield ['participant_code', 'participant_label', 'session_label',
-           'treatment_used1', 'treatment_used2',
-           'blunder_choice1', 'blunder_choice2',
-           'treatment_choice1', 'treatment_choice2',
-           'control_choice1', 'control_choice2',
-           'switched1', 'switched2']
-
-    for player in players:
-        participant = player.participant
-        for field in settings.PARTICIPANT_FIELDS:  # Custom Export doesn't like empty fields
-            if field not in participant.vars:
-                if field not in ['lc1a', 'pair', 'stage', 'task_to_complete', 'opt_choice1', 'opt_choice2']:
-                    setattr(participant, field, None)
-        yield [participant.code, participant.label, participant.session.label,
-               participant.treatment_used1, participant.treatment_used2,
-               participant.blunder_choice1, participant.blunder_choice2,
-               participant.treatment_choice1, participant.treatment_choice2,
-               participant.control_choice1, participant.control_choice2,
-               participant.switched1, participant.switched2]
+# def custom_export(players):
+#     yield ['participant_code', 'participant_label', 'session_label',
+#            'treatment_used1', 'treatment_used2',
+#            'blunder_choice1', 'blunder_choice2',
+#            'treatment_choice1', 'treatment_choice2',
+#            'control_choice1', 'control_choice2',
+#            'switched1', 'switched2']
+#
+#     for player in players:
+#         participant = player.participant
+#         for field in settings.PARTICIPANT_FIELDS:  # Custom Export doesn't like empty fields
+#             if field not in participant.vars:
+#                 if field not in ['lc1a', 'pair', 'stage', 'task_to_complete', 'opt_choice1', 'opt_choice2']:
+#                     setattr(participant, field, None)
+#         yield [participant.code, participant.label, participant.session.label,
+#                participant.treatment_used1, participant.treatment_used2,
+#                participant.blunder_choice1, participant.blunder_choice2,
+#                participant.treatment_choice1, participant.treatment_choice2,
+#                participant.control_choice1, participant.control_choice2,
+#                participant.switched1, participant.switched2]

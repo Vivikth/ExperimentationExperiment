@@ -1,5 +1,10 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
+{% block title %}
+    Random Selection Results
+{% endblock %}
+{% block content %}
+
 <style>
 
 div.remind {
@@ -22,27 +27,15 @@ ul { display: inline-block; text-align: left; }
 
 </style>
 
-{% block title %}
-    Random Selection Results
-{% endblock %}
 
-{% block content %}
 
 <p>
     Thank you for choosing your version {{ version_for_template }} task-list pairs.
-    I randomly selected your {{ treatment_template }} version {{ version_for_template }} choice.
+    I randomly selected your version {{ version_for_template }} choice.
     This means you will have to complete the following task-list pair:
 </p>
 
-{{ if player.participant.treatment_used1 == 'Treatment' }}
-    {% with control=False %}
-        {{ if player.Task_Choice == "Option 1" }}
-            {{ include 'RET_Choice/Option1.html'}}
-        {{ else }}
-            {{ include 'RET_Choice/Option2.html'}}
-        {{ endif }}
-    {% endwith %}
-{{ elif player.participant.treatment_used1 == 'Blunder'}}
+{{ if player.participant.treatment_used1 == 'Blunder'}}
     {{ if player.Blunder_Task_Choice == "Option 1" }}
         <div class = "opt1">
         <p>
@@ -52,7 +45,6 @@ ul { display: inline-block; text-align: left; }
             <ul>
                 <li>{{remaining_tasks.0}} (level 1)</li>
                 <li>{{remaining_tasks.1}} (level 1)</li>
-                <li>{{remaining_tasks.2}} (level 1)</li>
             </ul>
         </div>
     {{ else }}
@@ -64,16 +56,15 @@ ul { display: inline-block; text-align: left; }
             <ul>
                 <li>{{remaining_tasks.0}} (level 1)</li>
                 <li>{{remaining_tasks.1}} (level 1)</li>
-                <li>{{remaining_tasks.2}} (level 1)</li>
             </ul>
         </div>
     {{ endif }}
 {{ else }}
     {% with control=True %}
         {{ if player.Control_Task_Choice == "Option 1" }}
-            {{ include 'RET_Choice/Option1.html'}}
+            {{ include 'Choice/Option1.html'}}
         {{ else }}
-            {{ include 'RET_Choice/Option2.html'}}
+            {{ include 'Choice/Option2.html'}}
         {{ endif }}
     {% endwith %}
 {{ endif }}

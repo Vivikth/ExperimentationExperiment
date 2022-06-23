@@ -10,7 +10,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'Introduction'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    PAYMENT_AMOUNT = 20  # May need to be updated later on
+    PAYMENT_AMOUNT = 5  # May need to be updated later on
 
 
 class Subsession(BaseSubsession):
@@ -50,12 +50,18 @@ class Player(BasePlayer):
                                            choices=Binary_Choice_List,
                                            widget=widgets.RadioSelectHorizontal,
                                            )
+    payment_question = models.FloatField(doc="payment_question")
 
 
 # FUNCTIONS
 def agreement_error_message(_player: Player, value):
     if value is False:
         return 'You must agree to participate in this experiment to continue.'  # May need to fix error message
+
+
+def payment_question_error_message(_player, value):
+    if value != C.PAYMENT_AMOUNT:
+        return "Your answer was incorrect. Please try again."
 
 
 # PAGES
@@ -69,7 +75,15 @@ class SonaID(Page):
 
 
 class Introduction(Page):
-    pass
+    form_model = 'player'
+    form_fields = ['payment_question', 'Tried_Fancy_Pizza', 'Tried_Cheap_Pizza', 'Tried_Fancy_Taco', 'Tried_Cheap_Taco']
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.participant.tried_fancy_pizza = player.Tried_Fancy_Pizza
+        player.participant.tried_cheap_pizza = player.Tried_Cheap_Pizza
+        player.participant.tried_fancy_taco  = player.Tried_Fancy_Taco
+        player.participant.tried_cheap_taco  = player.Tried_Cheap_Taco
 
 
 class InformationSheet(Page):
@@ -80,21 +94,5 @@ class InformationSheet(Page):
     ]
 
 
-class TriedBefore(Page):
-    form_model = 'player'
-    form_fields = [
-        'Tried_Fancy_Pizza',
-        'Tried_Cheap_Pizza',
-        'Tried_Fancy_Taco',
-        'Tried_Cheap_Taco'
-    ]
 
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        player.participant.tried_fancy_pizza = player.Tried_Fancy_Pizza
-        player.participant.tried_cheap_pizza = player.Tried_Cheap_Pizza
-        player.participant.tried_fancy_taco  = player.Tried_Fancy_Taco
-        player.participant.tried_cheap_taco  = player.Tried_Cheap_Taco
-
-
-page_sequence = [SonaID, InformationSheet, Introduction, TriedBefore]
+page_sequence = [SonaID, InformationSheet, Introduction]

@@ -1,10 +1,7 @@
 from os import environ
 
 # Need to make a draft experiment structure, then can go from there (at least for initial bits).
-#    Introduction app (should include ethics approval - mobile check is unnecessary) - TICK
-#    BDM App - Intro + Quiz Structure working; need to remove preference elicitation
-#    Task_WTP - need to set up
-#    Choices (Blunder, control)
+# Next, need to go through HTML and make sure minute details are patched up
 #    Demographic survey
 
 SESSION_CONFIGS = [

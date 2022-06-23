@@ -2,8 +2,80 @@
     Welcome to the experiment!
 {{ endblock }}
 {{ block content }}
-<p>HERE IS SOME TEXT EXPLAINING THIS EXPERIMENT</p>
-    {{ formfields }}
+
+<h4> Video Description of experiment goes here</h4>
+<br>
+
+<p>
+    You are about to participate in an experiment on the economics of decision-making. <br>
+    If you <b>complete</b> this experiment, you will earn <b>${{ C.PAYMENT_AMOUNT }}</b>, which will be paid to you via PayPal at the end of the experiment. <br>
+    We will also provide you with dinner later tonight. <br>
+    On average, I expect that the current session of the experiment will take approximately <b>X</b> minutes. <br>
+</p>
+<br>
+<h3> The Basic Idea </h3>
+<p>
+    This experiment has 2 sessions: the current session, and a dinner session at <b>TIME</b> tonight. <br>
+    All the choices you make in this experiment will determine the food you are served at the dinner session -
+    so <i>choosing appropriately</i> will allow you to eat the dinner you <b>prefer</b>. <br>
+    You can click the text below to see the descriptions of each food.
+</p>
+
+<details>
+    <summary> Click this text to show / hide the vague descriptions of the foods available</summary>
+    {{ include 'Choice/Food_Descriptions.html'}}
+
+</details>
+
+<br>
+
+<h3>What's Next?</h3>
+<p>
+    The current session has 3 stages. <br>
+    First, I will ask you some questions about how much you value the different foods. <br>
+    Afterwards, you will choose your dinner menu from a specified list. <br>
+    Finally, you will answer a simple demographic survey at the end of the session. <br>
+</p>
+<p>
+    At the dinner session, you will be able to select foods from the menu you chose in this session. <br>
+    You will need to fill out a small survey during the dinner session. <br>
+    Please note that you will only be paid if you <b>complete</b> the demographic survey and the survey at the dinner session.
+</p>
+
+
+<h3>Quick Questions</h3>
+<p>
+    Before moving on, please answer the following questions.
+</p>
+
+    <label>   How much will you be paid if you <b>complete</b> the experiment?</label>
+<div>
+    <label>$</label>
+    <input name="payment_question">
+</div>
+{{ formfield_errors 'payment_question' }}
+
+<br> <br>
+<h6> Which of the following foods have you tried before?</h6>
+{{ formfield 'Tried_Fancy_Pizza'  }}
+{{ formfield 'Tried_Cheap_Pizza'  }}
+{{ formfield 'Tried_Fancy_Taco'  }}
+{{ formfield 'Tried_Cheap_Taco'  }}
+
+
+
+<h4>The next stage</h4>
+<p> As part of this experiment, I want to determine how much you value a food. <br>
+    I will use a procedure called the switch-point procedure for this purpose. <br>
+    Click the next button to learn about the switch-point procedure.
+</p>
+
+
+
+
     {{ next_button }}
+
+
+
 
 {{ endblock }}

@@ -86,6 +86,7 @@ def task_name(string):
         raise ValueError('Input must be first (capital) letter of a task name')
 
 
+# The following function is from the thesis version; needs to be fixed before implementing bots.
 def app_after_task(player, _upcoming_apps):
     """Returns next app after player has completed task"""
     import time

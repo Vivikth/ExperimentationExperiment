@@ -1,6 +1,6 @@
 from otree.api import *
 from Global_Functions import Binary_Choice_List
-
+import time
 doc = """
 The app that introduces subjects to the experiment
 """
@@ -82,8 +82,9 @@ class Introduction(Page):
     def before_next_page(player: Player, timeout_happened):
         player.participant.tried_fancy_pizza = player.Tried_Fancy_Pizza
         player.participant.tried_cheap_pizza = player.Tried_Cheap_Pizza
-        player.participant.tried_fancy_taco  = player.Tried_Fancy_Taco
-        player.participant.tried_cheap_taco  = player.Tried_Cheap_Taco
+        player.participant.tried_fancy_taco = player.Tried_Fancy_Taco
+        player.participant.tried_cheap_taco = player.Tried_Cheap_Taco
+        player.participant.start_time = time.time()
 
 
 class InformationSheet(Page):

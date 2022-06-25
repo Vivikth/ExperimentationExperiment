@@ -1,10 +1,8 @@
 import random
-import time
 from otree.api import *
 
-import settings
-from . import models
-from Global_Functions import task_name, task_name_decoder, option_index, list_subtract
+# from . import models
+from Global_Functions import list_subtract
 
 # Treatment, Pair1, pair2 are inputted before.
 
@@ -28,9 +26,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    Task_Choice = models.CharField(
-        doc="Task_Choice", choices=Constants.task_list, widget=widgets.RadioSelect,
-    )
     Control_Task_Choice = models.CharField(
         doc="Control_Task_Choice", choices=Constants.task_list, widget=widgets.RadioSelect,
     )
@@ -49,11 +44,8 @@ class Player(BasePlayer):
 def creating_session(subsession):
     if subsession.round_number == 1:
         for player in subsession.get_players():
-            if 'treatment' in player.session.config:
-                player.participant.treatment = player.session.config['treatment']
             if 'pair1' in player.session.config:
                 player.participant.pair1 = player.session.config['pair1']
-                player.participant.pair = player.participant.pair1
             if 'pair2' in player.session.config:
                 player.participant.pair2 = player.session.config['pair2']
             if 'treatment_used1' in player.session.config:
@@ -102,13 +94,20 @@ class ControlTaskSelection(Page):
         good_task = player.participant.pair1[0]
         bad_task = player.participant.pair1[1]
         task_info = player.participant.pair1[0]
+        other_task = player.participant.pair2[0]
         return {
             'Good_Task': good_task,
             'Bad_Task': bad_task,
             'stage_for_template': stage_for_template,
             'Task_Info': task_info,
-            'version_for_template': version_for_template
+            'version_for_template': version_for_template,
+            'Other_Task': other_task
         }
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.participant.blunder_choice = player.Blunder_Task_Choice
+        player.participant.control_choice = player.Control_Task_Choice
 
 
 class RandomPick(Page):

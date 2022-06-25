@@ -1,8 +1,7 @@
 from otree.api import *
 #  Need to transfer old app in.
-import settings
+# import settings
 from Global_Functions import read_csv
-from more_itertools import sort_together
 
 author = 'Vivikth'  # This app was based off questions_from_csv in Otree Snippets
 doc = """Introduces and tests subjects on BDM Procedure"""
@@ -40,25 +39,6 @@ class Player(BasePlayer):
     Q3_Correct = models.BooleanField()
     Q4_Correct = models.BooleanField()
     Q5_Correct = models.BooleanField()
-    # Fancy_Pizza_Value = models.FloatField(doc="Fancy_Pizza_Value", min=0, max=100,
-    #                                       label="Your switch point for the fancy pizza is:")
-    # Cheap_Pizza_Value = models.FloatField(doc="Cheap_Pizza_Value", min=0, max=100,
-    #                                       label="Your switch point for the cheap pizza task is:")
-    # Fancy_Taco_Value = models.FloatField(doc="Fancy_Taco_Value", min=0, max=100,
-    #                                      label="Your switch point for the fancy taco task is:")
-    # Cheap_Taco_Value = models.FloatField(doc="Cheap_Taco_Value", min=0, max=100,
-    #                                      label="Your switch point for the cheap taco task is:")
-    # Elicitation Variables
-    # Tabulation_Value = models.FloatField(doc="Tabulation_Value", min=0, max=100,
-    #                                      label="Your switch point for the tabulation task is:")
-    # Concealment_Value = models.FloatField(doc="Concealment_Value", min=0, max=100,
-    #                                       label="Your switch point for the concealment task is:")
-    # Interpretation_Value = models.FloatField(doc="Interpretation_Value", min=0, max=100,
-    #                                          label="Your switch point for the interpretation task is:")
-    # Replication_Value = models.FloatField(doc="Replication_Value", min=0, max=100,
-    #                                       label="Your switch point for the replication task is:")
-    # Organisation_Value = models.FloatField(doc="Organisation_Value", min=0, max=100,
-    #                                        label="Your switch point for the organisation task is:")
 
 
 class Trial(ExtraModel):
@@ -113,23 +93,26 @@ class Stimuli(Page):
             trial.choice = responses[str(trial.id)]
             trial.is_correct = trial.choice == trial.solution
             player.participant.BDM_Score += int(trial.is_correct)
-            # print(trial.Qnum)
             # For getting question correct in horizontal data
-            if trial.Qnum == str(1.0):
+            if trial.Qnum == str(1):
                 player.Q1_Correct = trial.is_correct
                 player.participant.Q1_Correct = player.Q1_Correct
-            elif trial.Qnum == str(2.0):
+            elif trial.Qnum == str(2):
                 player.Q2_Correct = trial.is_correct
                 player.participant.Q2_Correct = player.Q2_Correct
-            elif trial.Qnum == str(3.0):
+            elif trial.Qnum == str(3):
                 player.Q3_Correct = trial.is_correct
                 player.participant.Q3_Correct = player.Q3_Correct
-            elif trial.Qnum == str(4.0):
+            elif trial.Qnum == str(4):
                 player.Q4_Correct = trial.is_correct
                 player.participant.Q4_Correct = player.Q4_Correct
-            elif trial.Qnum == str(5.0):
+            elif trial.Qnum == str(5):
                 player.Q5_Correct = trial.is_correct
                 player.participant.Q5_Correct = player.Q5_Correct
 
 
-page_sequence = [BDMIntro, Stimuli]
+class BDMConc(Page):
+    pass
+
+
+page_sequence = [BDMIntro, Stimuli, BDMConc]

@@ -1,5 +1,5 @@
 from otree.api import *
-
+import time
 import settings
 
 author = 'Vivikth'
@@ -10,8 +10,6 @@ class Constants(BaseConstants):
     name_in_url = 'Demog_Survey'
     players_per_group = None
     num_rounds = 1
-    identify_tasks = ['identify_tabulation', 'identify_organisation',
-                      'identify_replication', 'identify_concealment', 'identify_interpretation']
 
 
 class Subsession(BaseSubsession):
@@ -34,16 +32,7 @@ class Player(BasePlayer):
     econ_classes = models.IntegerField(doc="econ_classes",
                                        label="How many economics classes have you taken so far?")
     years = models.IntegerField(doc="years")
-    GPA = models.FloatField(doc="GPA", label="What is your university GPA?")
-
-    identify = models.StringField(doc="identify",
-                                  choices=["Yes", "No"],
-                                  label="Did you correctly identify any of the tasks before completing them?")
-    identify_tabulation = models.BooleanField(blank=True, label="Tabulation", widget=widgets.CheckboxInput)
-    identify_organisation = models.BooleanField(blank=True, label="Organisation", widget=widgets.CheckboxInput)
-    identify_replication = models.BooleanField(blank=True, label="Replication", widget=widgets.CheckboxInput)
-    identify_concealment = models.BooleanField(blank=True, label="Concealment", widget=widgets.CheckboxInput)
-    identify_interpretation = models.BooleanField(blank=True, label="Interpretation", widget=widgets.CheckboxInput)
+    GPA = models.FloatField(doc="GPA", label="What is your university GPA?", min=0, max=7)
 
 
 # FUNCTIONS
@@ -52,16 +41,11 @@ def study_choices(_player):
             'Arts and Social Sciences', 'Law', 'Other']
 
 
-def creating_session(subsession):
-    for player in subsession.get_players():
-        participant = player.participant
-
-
 # PAGES
 class Survey(Page):
     form_model = 'player'
     form_fields = ['age', 'gender', 'gender_self_select', 'study', 'econ_classes',
-                   'years', 'GPA', 'identify'] + Constants.identify_tasks
+                   'years', 'GPA']
 
     @staticmethod
     def error_message(player, values):
@@ -77,27 +61,26 @@ class Survey(Page):
             'gender_self_select_label': 'Please enter your gender if you would prefer to self-report'
         }
 
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.participant.end_time = time.time()
+        player.participant.time_taken = player.participant.end_time - player.participant.start_time
+
+
+class FinalPage(Page):
+    pass
+
 
 def custom_export(players):
     yield ['participant_code', 'participant_label', 'session_label', '_is_bot',  # Global Variables
-           'treatment', 'start_time', 'end_time',  # Introduction
-           'time_before_tasks', 'time_taken',
+           'start_time', 'end_time', 'time_taken',  # Time Variables
            'BDM_Score', 'Q1_Correct', 'Q2_Correct',  # BDM
            'Q3_Correct', 'Q4_Correct', 'Q5_Correct',
-           'Concealment_Value', 'Tabulation_Value',  # Task_WTP
-           'Interpretation_Value', 'Replication_Value', 'Organisation_Value',
-           'pair1', 'pair2', 'sub_menu1', 'sub_menu2',
-           'path', 'rand_task',
-           'treatment_used1', 'treatment_used2',  # RET_Choice
-           'blunder_choice1', 'blunder_choice2',
-           'treatment_choice1', 'treatment_choice2',
-           'control_choice1', 'control_choice2',
-           'switched1', 'switched2',
-           'menu_choice1', 'menu_choice2',  # Menu_Select
+           'Fancy_Pizza_Value', 'Cheap_Pizza_Value', 'Fancy_Taco_Value', 'Cheap_Taco_Value',  # Task_WTP
+           'pair1', 'pair2', 'rand_task', 'rand_outcome', 'BDM_Num',
+           'treatment_used1', 'blunder_choice', 'control_choice',  # RET_Choice
            'age', 'gender', 'gender_self_select',  # Demographic
-           'study', 'econ_classes', 'years', 'GPA',
-           'identify', 'identify_tabulation', 'identify_organisation',
-           'identify_replication', 'identify_concealment', 'identify_interpretation']
+           'study', 'econ_classes', 'years', 'GPA']
 
     for player in players:
         participant = player.participant
@@ -108,24 +91,17 @@ def custom_export(players):
                     setattr(participant, field, None)
 
         yield [participant.code, participant.label, participant.session.label, participant._is_bot,  # Global Vars
-               participant.treatment, participant.start_time, participant.end_time,  # Introduction
-               participant.time_before_tasks, participant.time_taken,
+               participant.start_time, participant.end_time, participant.time_taken,  # Time Variables
                participant.BDM_Score, participant.Q1_Correct, participant.Q2_Correct,  # BDM
                participant.Q3_Correct, participant.Q4_Correct, participant.Q5_Correct,
-               participant.Concealment_Value, participant.Tabulation_Value,  # Task_WTP
-               participant.Interpretation_Value, participant.Replication_Value, participant.Organisation_Value,
-               participant.pair1, participant.pair2, participant.sub_menu1, participant.sub_menu2,
-               participant.path, participant.rand_task,
-               participant.treatment_used1, participant.treatment_used2,  # RET_Choice
-               participant.blunder_choice1, participant.blunder_choice2,
-               participant.treatment_choice1, participant.treatment_choice2,
-               participant.control_choice1, participant.control_choice2,
-               participant.switched1, participant.switched2,
-               participant.menu_choice1, participant.menu_choice2,  # Menu_Select
+               participant.Fancy_Pizza_Value, participant.Cheap_Pizza_Value,  # Task_WTP
+               participant.Fancy_Taco_Value, participant.Cheap_Taco_Value,
+               participant.pair1, participant.pair2,
+               participant.rand_task, participant.rand_outcome, participant.BDM_Num,
+               participant.treatment_used1,  # RET_Choice
+               participant.blunder_choice, participant.control_choice,
                player.age, player.gender, player.gender_self_select,  # Demographic
-               player.study, player.econ_classes, player.years, player.GPA,
-               player.identify, player.identify_tabulation, player.identify_organisation,
-               player.identify_replication, player.identify_concealment, player.identify_interpretation]
+               player.study, player.econ_classes, player.years, player.GPA]
 
 
-page_sequence = [Survey]
+page_sequence = [Survey, FinalPage]

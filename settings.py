@@ -41,8 +41,19 @@ SESSION_CONFIGS = [
         app_sequence=['Choice'],
         pair1=["Fancy Pizza", "Cheap Taco"],
         pair2=["Fancy Taco", "Cheap Pizza"],
+    ),
+    dict(
+        name='Demog_Survey',
+        display_name='Survey',
+        num_demo_participants=1,
+        app_sequence=['Demog_Survey'],
+    ),
+    dict(
+        name='Experiment',
+        display_name='Experiment',
+        num_demo_participants=1,
+        app_sequence=['Introduction', 'BDM', 'Task_WTP', 'Choice', 'Demog_Survey'],
     )
-
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -61,11 +72,8 @@ PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks'
                       'Fancy_Pizza_Value', 'Cheap_Pizza_Value', 'Fancy_Taco_Value',  # Task_WTP
                       'Cheap_Taco_Value',
                       'pair1', 'pair2', 'rand_task', 'rand_outcome', 'BDM_Num', 'switch_point',
-                      'treatment_used1', 'treatment_used2', 'blunder_choice1', 'blunder_choice2',  # Choice
-                      'treatment_choice1', 'treatment_choice2', 'control_choice1', 'control_choice2',
-                      'switched1', 'switched2',
-                      'menu_choice1', 'menu_choice2',  # Menu_Select
-                      'lc1a', 'pair', 'stage', 'task_to_complete', 'opt_choice1', 'opt_choice2',  # Dynamic Vars
+                      'treatment_used1', 'blunder_choice', 'control_choice',  # Choice
+                      'pair', 'stage', 'task_to_complete', 'opt_choice1', 'opt_choice2',  # Dynamic Vars
                       'uniID']  # ID Vars
 SESSION_FIELDS = []
 

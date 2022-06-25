@@ -151,7 +151,7 @@ class InstructionPage(Page):
         if all(get_nullable(player, value) is not None for value in ['Fancy_Pizza_Value', 'Cheap_Pizza_Value',
                                                                      'Cheap_Taco_Value',
                                                                      'Fancy_Taco_Value']):
-            names = ['Fancy_Pizza_Value', 'Cheap_Pizza_Value', 'Cheap_Taco_Value', 'Fancy_Taco_Value']
+            names = ['Fancy Pizza', 'Cheap Pizza', 'Cheap Taco', 'Fancy Taco']
             values = [player.Fancy_Pizza_Value, player.Cheap_Pizza_Value, player.Cheap_Taco_Value,
                       player.Fancy_Taco_Value]
             return {player.id_in_group: sort_together([values, names])[1][::-1]}

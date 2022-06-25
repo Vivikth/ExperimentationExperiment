@@ -25,7 +25,7 @@ SESSION_CONFIGS = [
     ),
     dict(
         name='Task_WTP2',
-        display_name='Task_WTP2',
+        display_name='Task_WTP_never_tried',
         num_demo_participants=1,
         app_sequence=['Task_WTP'],
         continuation_rv=0.01,

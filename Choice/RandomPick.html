@@ -27,35 +27,33 @@ ul { display: inline-block; text-align: left; }
 
 </style>
 
-
-
 <p>
-    Thank you for choosing your version {{ version_for_template }} task-list pairs.
-    I randomly selected your version {{ version_for_template }} choice.
-    This means you will have to complete the following task-list pair:
+    Thank you for choosing your version food-menu pairs.
+    I randomly selected your  choice.
+    This means you will have to complete the following food-menu pair:
 </p>
 
 {{ if player.participant.treatment_used1 == 'Blunder'}}
     {{ if player.Blunder_Task_Choice == "Option 1" }}
         <div class = "opt1">
         <p>
-            Complete the <strong>{{Good_Task}} (level 1)</strong> task. <br>
-            After completing the <strong>{{Good_Task}} (level 1)</strong> task, you must complete <strong>one</strong> of the following tasks:
+            Eat the <strong>{{Good_Task}}</strong>. <br>
+            After eating the <strong>{{Good_Task}}</strong>, you must eat <strong>one</strong> of the following foods:
         </p>
             <ul>
-                <li>{{remaining_tasks.0}} (level 1)</li>
-                <li>{{remaining_tasks.1}} (level 1)</li>
+                <li>{{remaining_tasks.0}}</li>
+                <li>{{remaining_tasks.1}}</li>
             </ul>
         </div>
     {{ else }}
         <div class = "opt2">
         <p>
-            Complete the <strong>{{Bad_Task}} (level 1)</strong> task. <br>
-            After completing the <strong>{{Bad_Task}} (level 1)</strong> task, you must complete <strong>one</strong> of the following tasks:
+            Eat the <strong>{{Bad_Task}}</strong>. <br>
+            After eating the <strong>{{Bad_Task}}</strong>, you must eat <strong>one</strong> of the following foods:
         </p>
             <ul>
-                <li>{{remaining_tasks.0}} (level 1)</li>
-                <li>{{remaining_tasks.1}} (level 1)</li>
+                <li>{{remaining_tasks.0}}</li>
+                <li>{{remaining_tasks.1}}</li>
             </ul>
         </div>
     {{ endif }}
@@ -72,11 +70,7 @@ ul { display: inline-block; text-align: left; }
 
 <br>
 
-{{ if version_for_template == 'A'}}
-Click the next button to choose your version B task-list pairs.
-{{ else }}
-Click the next button to complete the first task in your version A task-list pair.
-{{ endif }}
+Click the next button to continue.
 <br> <br>
 
     {% next_button %}

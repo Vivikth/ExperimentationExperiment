@@ -56,18 +56,11 @@ def creating_session(subsession):
                 player.participant.pair = player.participant.pair1
             if 'pair2' in player.session.config:
                 player.participant.pair2 = player.session.config['pair2']
-            if 'sub_menu1' in player.session.config:
-                player.participant.sub_menu1 = player.session.config['sub_menu1']
-            if 'sub_menu2' in player.session.config:
-                player.participant.sub_menu2 = player.session.config['sub_menu2']
             if 'treatment_used1' in player.session.config:
                 player.participant.treatment_used1 = player.session.config['treatment_used1']
             else:
-                player.participant.treatment_used1 = random.choice(["Control", "Treatment", "Blunder"])
-            if 'treatment_used2' in player.session.config:
-                player.participant.treatment_used2 = player.session.config['treatment_used2']
-            else:
-                player.participant.treatment_used2 = random.choice(["Control", "Treatment", "Blunder"])
+                player.participant.treatment_used1 = random.choice(["Control", "Blunder"])
+            # print(player.participant.treatment_used1)
 
 
 # PAGES
@@ -121,9 +114,7 @@ class ControlTaskSelection(Page):
 class RandomPick(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        all_tasks = ['Tabulation', 'Concealment', 'Interpretation', 'Replication', 'Organisation']
-        stage_for_template = "1st"
-        version_for_template = "A"
+        all_tasks = ["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"]
         good_task = player.participant.pair1[0]
         bad_task = player.participant.pair1[1]
         task_info = player.participant.pair1[0]
@@ -131,9 +122,7 @@ class RandomPick(Page):
         return {
             'Good_Task': good_task,
             'Bad_Task': bad_task,
-            'stage_for_template': stage_for_template,
             'Task_Info': task_info,
-            'version_for_template': version_for_template,
             'remaining_tasks': remaining_tasks
         }
 

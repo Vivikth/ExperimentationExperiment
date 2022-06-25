@@ -1,7 +1,7 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
 {% block title %}
-    Choose a task-list pair (Version {{ version_for_template }})
+    Choose a food-menu pair
 {% endblock %}
 
 {% block content %}
@@ -34,9 +34,9 @@ ul { display: inline-block; text-align: left; }
 <div class = "remind">
     <h3>Reminder</h3>
 
-<p> In this stage of the experiment, you need to select a task-list pair. <br>
-    There is a <b>1 in 3</b> (approximately 33%) chance  that you will have to complete the task-list pair you choose on this page. <br>
-    Please think carefully about your choice, as it could <b>significantly affect</b> the time it takes for you to complete the experiment.
+<p> In this stage of the experiment, you need to select a food-menu pair. <br>
+    There is a <b>1 in 2</b> (50%) chance  that you will have to complete the food-menu pair you choose on this page. <br>
+    Please think carefully about your choice, as it could <b>affect</b> the food you eat at dinner!<br>
 </p>
 </div>
 
@@ -50,8 +50,8 @@ ul { display: inline-block; text-align: left; }
 <div class = "opt1">
     <h4>Option 1</h4>
 <p>
-    Complete the <strong>{{Good_Task}} </strong> task. <br>
-    After completing the <strong>{{Good_Task}} </strong> task, you must complete <strong>one</strong> of the following tasks:
+    Eat the <strong>{{Good_Task}}</strong>. <br>
+    After eating the <strong>{{Good_Task}}</strong>, you must eat <strong>one</strong> of the following foods:
 </p>
     <ul>
         <li>{{remaining_tasks.0}} </li>
@@ -63,8 +63,8 @@ ul { display: inline-block; text-align: left; }
 <div class = "opt2">
     <h4>Option 2</h4>
 <p>
-    Complete the <strong>{{Bad_Task}} </strong> task. <br>
-    After completing the <strong>{{Bad_Task}} </strong> task, you must complete <strong>one</strong> of the following tasks:
+    Eat the <strong>{{Bad_Task}}</strong>. <br>
+    After eating the <strong>{{Bad_Task}}</strong>, you must eat <strong>one</strong> of the following foods:
 </p>
     <ul>
         <li>{{remaining_tasks.0}} </li>
@@ -84,7 +84,7 @@ ul { display: inline-block; text-align: left; }
 
 <details>
     <summary>Click here if you'd like to see the task descriptions.</summary>
-    {{ include 'Choice/Task_Descriptions.html'}}
+    {{ include 'Choice/Food_Descriptions.html'}}
 
 </details>
 

@@ -60,7 +60,7 @@ PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks'
                       'BDM_Score', 'Q1_Correct', 'Q2_Correct', 'Q3_Correct', 'Q4_Correct', 'Q5_Correct',  # BDM
                       'Fancy_Pizza_Value', 'Cheap_Pizza_Value', 'Fancy_Taco_Value',  # Task_WTP
                       'Cheap_Taco_Value',
-                      'pair1', 'pair2', 'sub_menu1', 'sub_menu2', 'path', 'rand_task',
+                      'pair1', 'pair2', 'rand_task', 'rand_outcome', 'BDM_Num', 'switch_point',
                       'treatment_used1', 'treatment_used2', 'blunder_choice1', 'blunder_choice2',  # Choice
                       'treatment_choice1', 'treatment_choice2', 'control_choice1', 'control_choice2',
                       'switched1', 'switched2',

@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Congratulations on completing the experiment!
+{% endblock %}
+
+
+
+{% block content %}
+
+<p>
+    Please fill out the following questions, and then you will have completed the experiment.
+</p>
+
+    {% formfield player.age %}
+
+    {% formfield player.gender %}
+
+    {% formfield player.gender_self_select label="Please self-report your gender if you selected that option"%}
+
+    {% formfield player.study label="Which of the following best describes your degree or program?"%}
+
+    {% formfield player.econ_classes %}
+
+    {% formfield player.years label="How many years of university study have you completed? Enter 0 if in first year." %}
+
+    {% formfield player.GPA %}
+
+  <span>
+        For any of the tasks that you completed, were you able to correctly identify the nature of the task from its vague description?
+        That is, were you able to identify what the task required <b>before</b> you completed the task?
+  </span>
+    {% formfield player.identify label=""%}
+    <br>
+    <span>Please select the tasks you correctly identified (if you correctly identified any tasks).</span>
+    {% formfield player.identify_tabulation %}
+    {% formfield player.identify_organisation %}
+    {% formfield player.identify_replication %}
+    {% formfield player.identify_concealment %}
+    {% formfield player.identify_interpretation %}
+
+    <br> <br>
+
+    {% next_button %}
+
+{% endblock %}

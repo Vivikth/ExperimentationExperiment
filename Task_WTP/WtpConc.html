@@ -11,47 +11,9 @@
     Press the next button to continue with the experiment.
 </p>
 <br>
-<!--<p>-->
-<!--    I will now be running the randomization previously specified. <br>-->
-<!--    There is a 5% chance that one of the switch-point questions will be selected. <br>-->
-<!--</p>-->
-<!--<br>-->
 
 
 
-<!--    {{ if player.Rand_Outcome == "No_BDM" }}-->
-<!--<p>-->
-<!--    None of the switch-point questions were selected. <br>-->
-<!--    Click the next button to proceed with the rest of the experiment.-->
-<!--</p>-->
-<!--    {{ endif }}-->
-
-<!--    {{ if player.Rand_Outcome == "Yes_BDM" }}-->
-<!--<p>-->
-<!--    One of the switch-point questions was selected. <br>-->
-<!--    I randomly selected {{selected_task}} as the food. <br>-->
-<!--    I randomly selected question number {{player.BDM_Num}} as the question. <br>-->
-<!--    Your switch-point for this task was ${{ switch_point }}. <br>-->
-<!--</p>-->
-<!--<br>-->
-<!--        {{if switch_point > player.BDM_Num}}-->
-<!--    <p>-->
-<!--        Your switch-point was higher than the selected question. <br>-->
-<!--        This means you said that you prefer completing the {{selected_task}} (level 1) task to the money. <br>-->
-<!--        Click the next button to continue. <br>-->
-<!--    </p>-->
-<!--        {{endif}}-->
-
-<!--        {{if player.BDM_Num >= switch_point }}-->
-<!--    <p>-->
-<!--        Your switch-point was lower than the selected question. <br>-->
-<!--        This means you said that you prefer the money to completing the {{selected_task}} task. <br>-->
-<!--    </p>-->
-<!--        {{endif}}-->
-
-<!--    <br>-->
-
-<!--    {{ endif }}-->
 
 
     {{ next_button }}

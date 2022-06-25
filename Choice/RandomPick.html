@@ -69,8 +69,46 @@ ul { display: inline-block; text-align: left; }
 
 
 <br>
+Here are the results from your switch-point procedure.
 
-Click the next button to continue.
+    {{ if player.participant.rand_outcome == "No_BDM" }}
+<p>
+    None of the switch-point questions were selected. <br>
+</p>
+    {{ endif }}
+
+    {{ if player.participant.rand_outcome == "Yes_BDM" }}
+<p>
+    One of the switch-point questions was selected. <br>
+    I randomly selected {{player.participant.rand_task}} as the food. <br>
+    I randomly selected question number {{player.participant.BDM_Num}} as the question. <br>
+    Your switch-point for this task was ${{ player.participant.switch_point }}. <br>
+</p>
+<br>
+        {{if player.participant.switch_point > player.participant.BDM_Num}}
+    <p>
+        Your switch-point was higher than the selected question. <br>
+        This means you said that you prefer eating the {{player.participant.rand_task}} to the money. <br>
+    </p>
+        {{endif}}
+
+        {{if player.participant.BDM_Num >= player.participant.switch_point }}
+    <p>
+        Your switch-point was lower than the selected question. <br>
+        This means you said that you prefer the money to eating the {{player.participant.rand_task}}. <br>
+    </p>
+        {{endif}}
+
+    <br>
+
+    {{ endif }}
+
+<p>
+    You will be able to complete your chosen food-menu pair at the dinner session. <br>
+    To finish this session, you will need to complete a demographic survey. <br>
+    Click the next button to continue to the survey <br>
+</p>
+
 <br> <br>
 
     {% next_button %}

@@ -113,6 +113,8 @@ def creating_session(subsession: Subsession):
         else:
             p.Rand_Outcome = "No_BDM"  # If best / worst task is not selected.
             p.BDM_Num = 0  # These are placeholder values - they will never be accessed.
+        p.participant.rand_outcome = p.Rand_Outcome
+        p.participant.BDM_Num = p.BDM_Num
         for tried in ['tried_fancy_pizza', 'tried_cheap_pizza', 'tried_fancy_taco', 'tried_cheap_taco']:
             if tried in p.session.config:
                 p.participant.vars[tried] = p.session.config[tried]
@@ -162,14 +164,13 @@ class InstructionPage(Page):
         player.participant.Cheap_Pizza_Value = player.Cheap_Pizza_Value
         player.participant.Fancy_Taco_Value = player.Fancy_Taco_Value
         player.participant.Cheap_Taco_Value = player.Cheap_Taco_Value
+        player.participant.switch_point = value_function(player.Rand_T, player)
 
 
 class WtpConc(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         player.participant.pair1, player.participant.pair2 = pair_generator(player)
-        print(player.participant.pair1)
-        print(player.participant.pair2)
     # @staticmethod
     # def app_after_this_page(player: Player, upcoming_apps):
     #     if player.Rand_Outcome == "C":  # Continue with experiment without best or worst task.
@@ -201,6 +202,7 @@ class WtpConc(Page):
             'switch_point': switch_point,
             'selected_task': player.Rand_T
         }
+
 
 
 page_sequence = [WtpIntro, InstructionPage, WtpConc]

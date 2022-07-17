@@ -111,8 +111,8 @@ class Stimuli(Page):
                 player.participant.Q5_Correct = player.Q5_Correct
 
 
-class BDMConc(Page):
+class BdmConc(Page):
     pass
 
 
-page_sequence = [BDMIntro, Stimuli, BDMConc]
+page_sequence = [BDMIntro, Stimuli, BdmConc]

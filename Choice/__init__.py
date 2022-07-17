@@ -118,9 +118,11 @@ class RandomPick(Page):
         bad_task = player.participant.pair1[1]
         task_info = player.participant.pair1[0]
         remaining_tasks = list_subtract(all_tasks, [good_task, bad_task])
+        other_task = player.participant.pair2[0]
         return {
             'Good_Task': good_task,
             'Bad_Task': bad_task,
+            'Other_Task': other_task,
             'Task_Info': task_info,
             'remaining_tasks': remaining_tasks
         }

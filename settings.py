@@ -53,6 +53,13 @@ SESSION_CONFIGS = [
         display_name='Experiment',
         num_demo_participants=1,
         app_sequence=['Introduction', 'BDM', 'Task_WTP', 'Choice', 'Demog_Survey'],
+    ),
+    dict(
+        name='Intro_BOT',
+        display_name='Intro_BOT',
+        num_demo_participants=1,
+        app_sequence=['Introduction'],
+        use_browser_bots=True
     )
 ]
 

@@ -37,8 +37,8 @@ ul { display: inline-block; text-align: left; }
     {{ if player.Blunder_Task_Choice == "Option 1" }}
         <div class = "opt1">
         <p>
-            Eat the <strong>{{Good_Task}}</strong>. <br>
-            After eating the <strong>{{Good_Task}}</strong>, you must eat <strong>one</strong> of the following foods:
+            Eat the <strong>{{Good_Task}}</strong> at the end of this session. <br>
+            After eating the <strong>{{Good_Task}}</strong>, you must choose <strong>one</strong> of the following foods to eat at the dinner session:
         </p>
             <ul>
                 <li>{{remaining_tasks.0}}</li>
@@ -48,8 +48,8 @@ ul { display: inline-block; text-align: left; }
     {{ else }}
         <div class = "opt2">
         <p>
-            Eat the <strong>{{Bad_Task}}</strong>. <br>
-            After eating the <strong>{{Bad_Task}}</strong>, you must eat <strong>one</strong> of the following foods:
+            Eat the <strong>{{Bad_Task}}</strong> at the end of this session. <br>
+            After eating the <strong>{{Bad_Task}}</strong>, you must choose <strong>one</strong> of the following foods to eat at the dinner session:
         </p>
             <ul>
                 <li>{{remaining_tasks.0}}</li>
@@ -81,8 +81,8 @@ Here are the results from your switch-point procedure.
 <p>
     One of the switch-point questions was selected. <br>
     I randomly selected {{player.participant.rand_task}} as the food. <br>
-    I randomly selected question number {{player.participant.BDM_Num}} as the question. <br>
-    Your switch-point for this task was ${{ player.participant.switch_point }}. <br>
+    I randomly selected question number {{player.participant.BDM_Num}} as the question, which corresponds to ${{BDM_Payout|to2}}. <br>
+    Your switch-point for this task was ${{ player.participant.switch_point|to2 }}. <br>
 </p>
 <br>
         {{if player.participant.switch_point > player.participant.BDM_Num}}
@@ -104,8 +104,9 @@ Here are the results from your switch-point procedure.
     {{ endif }}
 
 <p>
-    You will be able to complete your chosen food-menu pair at the dinner session. <br>
-    To finish this session, you will need to complete a demographic survey. <br>
+    You will be able to complete your chosen food-menu pair shortly. <br>
+    To finish this session, you will need to complete a demographic survey.<br>
+    Afterwards, you will receive your chosen food sample. <br>
     Click the next button to continue to the survey <br>
 </p>
 

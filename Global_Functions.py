@@ -3,6 +3,14 @@ Binary_Choice_List = [
     [True, 'Yes'],
 ]
 
+Likert_Familiarity_List = [
+    [1, 'Not at all familiar'],
+    [2, 'Slightly familiar'],
+    [3, 'Somewhat familiar'],
+    [4, 'Moderately familiar'],
+    [5, 'Extremely familiar']
+]
+
 
 def read_csv(filename):
     """Reads a CSV in random order"""

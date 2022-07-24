@@ -1,6 +1,7 @@
 from otree.api import *
-from Global_Functions import Binary_Choice_List
+from Global_Functions import Binary_Choice_List, Likert_Familiarity_List
 import time
+
 doc = """
 The app that introduces subjects to the experiment
 """
@@ -33,21 +34,22 @@ class Player(BasePlayer):
     )
     name = models.StringField()
     date = models.StringField()
-    # The following are tried before. Do we need to ensure incentive compatibility? HOW?
-    Tried_Fancy_Pizza = models.BooleanField(label='I have tried the fancy pizza before',
-                                            choices=Binary_Choice_List,
+
+
+    Tried_Fancy_Pizza = models.IntegerField(label='How familiar are you with fancy pizzas?',
+                                            choices=Likert_Familiarity_List,
                                             widget=widgets.RadioSelectHorizontal,
                                             )
-    Tried_Cheap_Pizza = models.BooleanField(label='I have tried the cheap pizza before',
-                                            choices=Binary_Choice_List,
+    Tried_Cheap_Pizza = models.IntegerField(label='How familiar are you with cheap pizzas?',
+                                            choices=Likert_Familiarity_List,
                                             widget=widgets.RadioSelectHorizontal,
                                             )
-    Tried_Fancy_Taco = models.BooleanField(label='I have tried the fancy taco before',
-                                           choices=Binary_Choice_List,
+    Tried_Fancy_Taco = models.IntegerField(label='How familiar are you with fancy tacos?',
+                                           choices=Likert_Familiarity_List,
                                            widget=widgets.RadioSelectHorizontal,
                                            )
-    Tried_Cheap_Taco = models.BooleanField(label='I have tried the cheap taco before',
-                                           choices=Binary_Choice_List,
+    Tried_Cheap_Taco = models.IntegerField(label='How familiar are you with cheap tacos?',
+                                           choices=Likert_Familiarity_List,
                                            widget=widgets.RadioSelectHorizontal,
                                            )
     payment_question = models.FloatField(doc="payment_question")

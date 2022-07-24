@@ -60,6 +60,24 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['Introduction'],
         use_browser_bots=True
+    ),
+    dict(
+        name='BDM_BOT',
+        display_name='BDM_BOT',
+        num_demo_participants=1,
+        app_sequence=['BDM'],
+        use_browser_bots=True
+    ),
+    dict(
+        name='Task_WTP_BOT',
+        display_name='Task_WTP_BOT',
+        num_demo_participants=1,
+        app_sequence=['Task_WTP'],
+        use_browser_bots=True,
+        tried_fancy_pizza=False,
+        tried_cheap_pizza=False,
+        tried_fancy_taco=False,
+        tried_cheap_taco=False
     )
 ]
 

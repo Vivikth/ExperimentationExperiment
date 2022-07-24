@@ -29,10 +29,10 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['Task_WTP'],
         continuation_rv=0.01,
-        tried_fancy_pizza=False,
-        tried_cheap_pizza=False,
-        tried_fancy_taco=False,
-        tried_cheap_taco=False
+        tried_fancy_pizza=1,
+        tried_cheap_pizza=2,
+        tried_fancy_taco=2,
+        tried_cheap_taco=4
     ),
     dict(
         name='Choice',

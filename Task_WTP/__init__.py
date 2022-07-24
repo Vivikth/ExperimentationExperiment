@@ -61,7 +61,9 @@ def pair_generator(player: Player):
     participant = player.participant
     task_info_status = [participant.tried_fancy_pizza, participant.tried_cheap_pizza, participant.tried_fancy_taco,
                         participant.tried_cheap_taco]
-    not_tried_tasks = [task for task, tried in zip(all_tasks, task_info_status) if not tried]
+    not_tried_tasks = [(task, _) for _, task in sorted(zip(task_info_status, all_tasks))]
+    least_familiar_tasks = [thingo for thingo in not_tried_tasks if thingo[1] <= sorted(not_tried_tasks,
+                                                                                        key=lambda x: x[1])[1][1]]
 
     def reorder_pair(pair):
         if value_function(pair[0], player) >= value_function(pair[1], player):
@@ -69,25 +71,37 @@ def pair_generator(player: Player):
         else:
             return pair[::-1]
 
+    values = [value_function(thingo[0], player) for thingo in least_familiar_tasks]
 
-    if len(not_tried_tasks) == 2:
-        participant.tried_ge_3 = 0
-        values = [value_function(task, player) for task in not_tried_tasks]
-        pair1 = [task for _, task in sorted(zip(values, all_tasks), reverse=True)]  # Untried (x,y) with v(x) >= v(y)
-        new_list = list_subtract(all_tasks, pair1)
-        pair2 = reorder_pair(random.sample(new_list, 2))
-    elif len(not_tried_tasks) > 2:
-        participant.tried_ge_3 = 0
-        values = [value_function(task, player) for task in not_tried_tasks]
-        diff, index1, index2 = find_min_diff(values, len(values))
-        pair1 = reorder_pair([all_tasks[index1], all_tasks[index2]])  # Untried (x,y) with v(x) >= v(y)
-        new_list = list_subtract(all_tasks, pair1)
-        pair2 = reorder_pair(random.sample(new_list, 2))
-    else:
-        participant.tried_ge_3 = 1
-        pair1 = reorder_pair(random.sample(all_tasks, 2))
-        new_list = list_subtract(all_tasks, pair1)
-        pair2 = reorder_pair(random.sample(new_list, 2))
+    diff, index1, index2 = find_min_diff(values, len(values))
+    pair1 = reorder_pair([least_familiar_tasks[index1][0], least_familiar_tasks[index2][0]])
+    new_list = list_subtract(all_tasks, pair1)
+    pair2 = reorder_pair(random.sample(new_list, 2))
+
+
+    # pair (a,b) is the pair with least Likert rankings (i.e. subject is least familiar); a preferred to b.
+    # pair1 = reorder_pair(not_tried_tasks[0:2])
+    # new_list = list_subtract(all_tasks, pair1)
+    # pair2 = reorder_pair(random.sample(new_list, 2))
+    #
+    # if len(not_tried_tasks) == 2:
+    #     participant.tried_ge_3 = 0
+    #     values = [value_function(task, player) for task in not_tried_tasks]
+    #     pair1 = [task for _, task in sorted(zip(values, all_tasks), reverse=True)]  # Untried (x,y) with v(x) >= v(y)
+    #     new_list = list_subtract(all_tasks, pair1)
+    #     pair2 = reorder_pair(random.sample(new_list, 2))
+    # elif len(not_tried_tasks) > 2:
+    #     participant.tried_ge_3 = 0
+    #     values = [value_function(task, player) for task in not_tried_tasks]
+    #     diff, index1, index2 = find_min_diff(values, len(values))
+    #     pair1 = reorder_pair([all_tasks[index1], all_tasks[index2]])  # Untried (x,y) with v(x) >= v(y)
+    #     new_list = list_subtract(all_tasks, pair1)
+    #     pair2 = reorder_pair(random.sample(new_list, 2))
+    # else:
+    #     participant.tried_ge_3 = 1
+    #     pair1 = reorder_pair(random.sample(all_tasks, 2))
+    #     new_list = list_subtract(all_tasks, pair1)
+    #     pair2 = reorder_pair(random.sample(new_list, 2))
 
     return pair1, pair2
 
@@ -171,6 +185,7 @@ class WtpConc(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         player.participant.pair1, player.participant.pair2 = pair_generator(player)
+        # print(player.participant.pair1, player.participant.pair2)
     # @staticmethod
     # def app_after_this_page(player: Player, upcoming_apps):
     #     if player.Rand_Outcome == "C":  # Continue with experiment without best or worst task.

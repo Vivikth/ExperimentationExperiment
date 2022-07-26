@@ -129,7 +129,8 @@ def creating_session(subsession: Subsession):
             p.BDM_Num = 0  # These are placeholder values - they will never be accessed.
         p.participant.rand_outcome = p.Rand_Outcome
         p.participant.BDM_Num = p.BDM_Num
-        for tried in ['tried_fancy_pizza', 'tried_cheap_pizza', 'tried_fancy_taco', 'tried_cheap_taco']:
+        for tried in ['tried_fancy_pizza', 'tried_cheap_pizza', 'tried_fancy_taco', 'tried_cheap_taco', 'next_meal_day',
+                      'next_meal_time', 'next_meal_date']:
             if tried in p.session.config:
                 p.participant.vars[tried] = p.session.config[tried]
             else:

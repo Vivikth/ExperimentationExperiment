@@ -53,6 +53,11 @@ def creating_session(subsession):
             else:
                 player.participant.treatment_used1 = random.choice(["Control", "Blunder"])
             # print(player.participant.treatment_used1)
+        for tried in ['next_meal_day', 'next_meal_time', 'next_meal_date']:
+            if tried in player.session.config:
+                player.participant.vars[tried] = player.session.config[tried]
+            else:
+                pass
 
 
 # PAGES

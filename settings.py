@@ -9,7 +9,8 @@ SESSION_CONFIGS = [
         name='Introduction',
         display_name='Introduction',
         num_demo_participants=1,
-        app_sequence=['Introduction']
+        app_sequence=['Introduction'],
+        next_session="test"
     ),
     dict(
         name='BDM',
@@ -87,7 +88,8 @@ SESSION_CONFIGS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
+    real_world_currency_per_point=1.00, participation_fee=0.00, doc="", next_meal_day="Tuesday", next_meal_time="lunch",
+    next_meal_date="26th of July"
 )
 
 PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks', 'time_taken',
@@ -99,8 +101,8 @@ PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks'
                       'pair1', 'pair2', 'rand_task', 'rand_outcome', 'BDM_Num', 'switch_point',
                       'treatment_used1', 'blunder_choice', 'control_choice',  # Choice
                       'pair', 'stage', 'task_to_complete', 'opt_choice1', 'opt_choice2',  # Dynamic Vars
-                      'uniID']  # ID Vars
-SESSION_FIELDS = []
+                      'uniID', 'next_meal_day', 'next_meal_date', 'next_meal_time']  # ID Vars
+
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
@@ -117,3 +119,10 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 DEMO_PAGE_INTRO_HTML = """ """
 
 SECRET_KEY = '5795236920217'
+
+ROOMS = [
+    dict(
+        name='econ_lab',
+        display_name='Experimental Economics Lab',
+    )
+]

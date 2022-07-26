@@ -10,14 +10,15 @@
 <p>
     You are about to participate in an experiment on the economics of decision-making. <br>
     If you <b>complete</b> this experiment, you will earn <b>${{ C.PAYMENT_AMOUNT }}</b>, which will be paid to you via PayPal at the end of the experiment. <br>
-    We will also provide you with a sample of food at this session, and dinner later tonight. <br>
+    We will also provide you with a sample of food at this session, and {{player.participant.next_meal_time}} on
+ {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}. <br>
     On average, I expect that the current session of the experiment will take approximately <b>X</b> minutes. <br>
 </p>
 <br>
 <h3> The Basic Idea </h3>
 <p>
-    This experiment has 2 sessions: the current session, and a dinner session at <b>TIME</b> tonight. <br>
-    All the choices you make in this experiment will determine the food you are served at the current session and the dinner session -
+    This experiment has 2 sessions: the current session, and a second session on {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}.<br>
+    All the choices you make in this experiment will determine the food you are served at the current session and the second session -
     so <i>choosing appropriately</i> will allow you to eat the foods you <b>prefer</b>. <br>
     You can click the text below to see the descriptions of each food.
 </p>
@@ -33,13 +34,13 @@
 <p>
     The current session has 3 stages. <br>
     First, I will ask you some questions about how much you value the different foods. <br>
-    Afterwards, you will choose a sample for this session and a dinner menu from a specified list. <br>
+    Afterwards, you will choose a sample for this session and a {{player.participant.next_meal_time}} menu for the second session from a specified list. <br>
     Finally, you will answer a simple demographic survey at the end of the session, then get to try a food sample. <br>
 </p>
 <p>
-    At the dinner session, you will be able to select foods from the menu you chose in this session. <br>
-    You will need to fill out a small survey during the dinner session. <br>
-    Please note that you will only be paid if you <b>complete</b> the demographic survey and the survey at the dinner session.
+    At the second session, you will be able to select foods from the {{player.participant.next_meal_time}} menu you chose in this session. <br>
+    You will need to fill out a small survey during the second session. <br>
+    Please note that you will only be paid if you <b>complete</b> the demographic survey and the survey at the second session.
 </p>
 
 
@@ -55,8 +56,8 @@
 </div>
 {{ formfield_errors 'payment_question' }}
 
-<br> <br>
-<h6> Which of the following foods have you tried before?</h6>
+<br>
+
 
 
 {{ formfield 'Tried_Fancy_Pizza'  }}
@@ -71,8 +72,6 @@
     I will use a procedure called the switch-point procedure for this purpose. <br>
     Click the next button to learn about the switch-point procedure.
 </p>
-
-
 
 
     {{ next_button }}

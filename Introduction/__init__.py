@@ -66,6 +66,12 @@ def payment_question_error_message(_player, value):
         return "Your answer was incorrect. Please try again."
 
 
+def creating_session(subsession):
+    for player in subsession.get_players():
+        player.participant.next_meal_day = player.session.config["next_meal_day"]
+        player.participant.next_meal_time = player.session.config["next_meal_time"]
+        player.participant.next_meal_date = player.session.config["next_meal_date"]
+
 # PAGES
 class SonaID(Page):
     form_model = 'player'
@@ -87,6 +93,12 @@ class Introduction(Page):
         player.participant.tried_fancy_taco = player.Tried_Fancy_Taco
         player.participant.tried_cheap_taco = player.Tried_Cheap_Taco
         player.participant.start_time = time.time()
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return {
+            'next_session': player.session.config["next_session"]
+        }
 
 
 class InformationSheet(Page):

@@ -157,16 +157,8 @@ def bot_should_play_app(self, app):
         return bot_should_play_app(self, 'Introduction') and self.case['Introduction'] == 'all_correct'
     if app == 'Task_WTP':  # No additional requirements
         return bot_should_play_app(self, 'BDM')
-    if 'task' in app:
-        return bot_should_play_app(self, 'BDM')
-    if 'RET' in app:
-        if 'path' not in self.player.participant.vars:  # Depends if we want to test Choice alone or not
-            return bot_should_play_app(self, 'BDM')
-        else:
-            return bot_should_play_app(self, 'BDM') and \
-                   (self.player.participant.path == 'Worst' or self.player.participant.path == 'Regular')
-    if 'Menu' in app or app == 'Interim':
-        return bot_should_play_app(self, 'RET')
+    if app == 'Choice':
+        return bot_should_play_app(self, 'Task_WTP')
     if app == 'Demog_Survey' or app == 'payment_info':
         if 'path' not in self.player.participant.vars:  # Depends if we want to test survey alone
             return bot_should_play_app(self, 'BDM')

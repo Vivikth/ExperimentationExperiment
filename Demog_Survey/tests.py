@@ -19,4 +19,5 @@ class PlayerBot(Bot):
             years = random.choice([0, 1, 2, 3, 4, 5])
             gpa = random.choice([3, 4, 5, 6, 7])
             yield Survey, dict(age=age, gender=gender, study=study, econ_classes=econ_classes,
-                               years=years, GPA=gpa, identify="No")
+                               years=years, GPA=gpa)
+            yield FinalPage

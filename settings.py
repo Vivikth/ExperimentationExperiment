@@ -75,11 +75,30 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['Task_WTP'],
         use_browser_bots=True,
-        tried_fancy_pizza=False,
-        tried_cheap_pizza=False,
-        tried_fancy_taco=False,
-        tried_cheap_taco=False
-    )
+        tried_fancy_pizza=1,
+        tried_cheap_pizza=1,
+        tried_fancy_taco=1,
+        tried_cheap_taco=1
+    ),
+    dict(
+        name='Choice_BOT',
+        display_name='Choice_BOT',
+        num_demo_participants=1,
+        app_sequence=['Choice'],
+        pair1=["Fancy Pizza", "Cheap Taco"],
+        pair2=["Fancy Taco", "Cheap Pizza"],
+        BDM_Num=50,
+        rand_outcome="No_BDM",
+        use_browser_bots=True,
+    ),
+    dict(
+        name='Demog_Survey_BOT',
+        display_name='Demog_Survey_BOT',
+        num_demo_participants=1,
+        app_sequence=['Demog_Survey'],
+        use_browser_bots=True,
+    ),
+
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

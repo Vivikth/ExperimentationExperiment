@@ -17,10 +17,10 @@ class PlayerBot(Bot):
                 yield SonaID, dict(sona_id=1000)
                 yield InformationSheet, dict(agreement=True,
                                              name="Beep_Boop")
-                yield Introduction, dict(Tried_Fancy_Pizza=False,
-                                         Tried_Cheap_Pizza=False,
-                                         Tried_Fancy_Taco=False,
-                                         Tried_Cheap_Taco=False,
+                yield Introduction, dict(Tried_Fancy_Pizza=1,
+                                         Tried_Cheap_Pizza=1,
+                                         Tried_Fancy_Taco=1,
+                                         Tried_Cheap_Taco=1,
                                          payment_question=C.PAYMENT_AMOUNT)
             #
             # yield Introduction,  if self.case['Introduction'] == 'incorrect':

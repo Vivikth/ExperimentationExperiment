@@ -11,7 +11,7 @@ doc = """Choosing a real effort task"""
 
 
 class Constants(BaseConstants):
-    name_in_url = 'RET_Choice1'
+    name_in_url = 'Choice'
     players_per_group = None
     num_rounds = 1
     task_list = ["Option 1", "Option 2"]
@@ -52,6 +52,10 @@ def creating_session(subsession):
                 player.participant.treatment_used1 = player.session.config['treatment_used1']
             else:
                 player.participant.treatment_used1 = random.choice(["Control", "Blunder"])
+            if 'BDM_Num' in player.session.config:
+                player.participant.BDM_Num = player.session.config['BDM_Num']
+            if 'rand_outcome' in player.session.config:
+                player.participant.rand_outcome = player.session.config['rand_outcome']
             # print(player.participant.treatment_used1)
         for tried in ['next_meal_day', 'next_meal_time', 'next_meal_date']:
             if tried in player.session.config:

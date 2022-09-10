@@ -98,6 +98,13 @@ SESSION_CONFIGS = [
         app_sequence=['Demog_Survey'],
         use_browser_bots=True,
     ),
+    dict(
+        name='Experiment_BOT',
+        display_name='Experiment_BOT',
+        num_demo_participants=1,
+        app_sequence=['Introduction', 'BDM', 'Task_WTP', 'Choice', 'Demog_Survey'],
+        use_browser_bots=True,
+    ),
 
 ]
 
@@ -108,7 +115,7 @@ SESSION_CONFIGS = [
 
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=0.00, doc="", next_meal_day="Tuesday", next_meal_time="lunch",
-    next_meal_date="26th of July"
+    next_meal_date="18th October", sample_meal_day="Tuesday", sample_meal_time="lunch", sample_meal_date="11th October"
 )
 
 PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks', 'time_taken',
@@ -120,7 +127,8 @@ PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks'
                       'pair1', 'pair2', 'rand_task', 'rand_outcome', 'BDM_Num', 'switch_point',
                       'treatment_used1', 'blunder_choice', 'control_choice',  # Choice
                       'pair', 'stage', 'task_to_complete', 'opt_choice1', 'opt_choice2',  # Dynamic Vars
-                      'uniID', 'next_meal_day', 'next_meal_date', 'next_meal_time']  # ID Vars
+                      'uniID', 'sample_meal_day', 'sample_meal_date', 'sample_meal_time',
+                      'next_meal_day', 'next_meal_date', 'next_meal_time']  # ID Vars
 
 
 # ISO-639 code

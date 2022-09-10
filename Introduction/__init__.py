@@ -36,19 +36,19 @@ class Player(BasePlayer):
     date = models.StringField()
 
 
-    Tried_Fancy_Pizza = models.IntegerField(label='How familiar are you with fancy pizzas?',
+    Tried_Fancy_Pizza = models.IntegerField(label='How familiar are you with the items in meal 1?',
                                             choices=Likert_Familiarity_List,
                                             widget=widgets.RadioSelectHorizontal,
                                             )
-    Tried_Cheap_Pizza = models.IntegerField(label='How familiar are you with cheap pizzas?',
+    Tried_Cheap_Pizza = models.IntegerField(label='How familiar are you with the items in meal 2?',
                                             choices=Likert_Familiarity_List,
                                             widget=widgets.RadioSelectHorizontal,
                                             )
-    Tried_Fancy_Taco = models.IntegerField(label='How familiar are you with fancy tacos?',
+    Tried_Fancy_Taco = models.IntegerField(label='How familiar are you with the items in meal 3?',
                                            choices=Likert_Familiarity_List,
                                            widget=widgets.RadioSelectHorizontal,
                                            )
-    Tried_Cheap_Taco = models.IntegerField(label='How familiar are you with cheap tacos?',
+    Tried_Cheap_Taco = models.IntegerField(label='How familiar are you with the items in meal 4?',
                                            choices=Likert_Familiarity_List,
                                            widget=widgets.RadioSelectHorizontal,
                                            )
@@ -71,6 +71,9 @@ def creating_session(subsession):
         player.participant.next_meal_day = player.session.config["next_meal_day"]
         player.participant.next_meal_time = player.session.config["next_meal_time"]
         player.participant.next_meal_date = player.session.config["next_meal_date"]
+        player.participant.sample_meal_day = player.session.config["sample_meal_day"]
+        player.participant.sample_meal_time = player.session.config["sample_meal_time"]
+        player.participant.sample_meal_date = player.session.config["sample_meal_date"]
 
 
 # PAGES
@@ -89,10 +92,10 @@ class Introduction(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        player.participant.tried_fancy_pizza = player.Tried_Fancy_Pizza
-        player.participant.tried_cheap_pizza = player.Tried_Cheap_Pizza
-        player.participant.tried_fancy_taco = player.Tried_Fancy_Taco
-        player.participant.tried_cheap_taco = player.Tried_Cheap_Taco
+        player.participant.tried_fancy_pizza = player.Tried_Fancy_Pizza # Sandwiches, Wraps and Uncrustables
+        player.participant.tried_cheap_pizza = player.Tried_Cheap_Pizza  # Hot Assorted Tarts
+        player.participant.tried_fancy_taco = player.Tried_Fancy_Taco # Individual Salads / Rice Paper Rolls
+        player.participant.tried_cheap_taco = player.Tried_Cheap_Taco # Hot fork dishes
         player.participant.start_time = time.time()
 
 

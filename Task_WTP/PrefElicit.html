@@ -7,19 +7,23 @@ font-weight: normal;
 
 
 <p>
-    In this stage of the experiment, I want to determine how much you value each food. <br>
-    I'll use the switch-point procedure to determine how much you value each food based on its description. <br>
+    In this stage of the experiment, I want to determine how much you value each meal. <br>
+    I'll use the switch-point procedure to determine how much you value each meal based on its description. <br>
     I've put information about the switch-point procedure at the bottom of the page if you'd like to refer back to it. <br>
 </p>
 <br>
 
-<h4> How much do you value eating the <b>{{Task_name}}</b>?</h4>
+<h4> How much do you value eating <b>{{Task_name}}</b>?</h4>
 <p>
     The description is: <strong> {{Task_description}}</strong>.  <br>
+    The allergen information is: <strong> {{Allergen_information}}</strong>. <br>
 </p>
 <p>
-    <b>Option A</b> means you eat the {{Task_name}} at the end of this session, then return to have {{player.participant.next_meal_time}} at the second session on {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}. <br>
-    <b>Option B</b> means you get the money at the end of this session, then return to have {{player.participant.next_meal_time}} at the second session on {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}.
+    <b>Option A</b> means you eat {{Meal_number}} at the second session on {{player.participant.sample_meal_day}} the
+    {{player.participant.sample_meal_date}}, then return to have {{player.participant.next_meal_time}} at the third session
+    on {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}. <br>
+    <b>Option B</b> means you get the money at the end of this session, then return to have {{player.participant.next_meal_time}}
+    at the third session on {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}.
 </p>
 <p>
     I will ask you the following questions. <br>

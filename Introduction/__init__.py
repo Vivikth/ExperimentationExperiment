@@ -92,10 +92,10 @@ class Introduction(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        player.participant.tried_fancy_pizza = player.Tried_Fancy_Pizza # Sandwiches, Wraps and Uncrustables
-        player.participant.tried_cheap_pizza = player.Tried_Cheap_Pizza  # Hot Assorted Tarts
-        player.participant.tried_fancy_taco = player.Tried_Fancy_Taco # Individual Salads / Rice Paper Rolls
-        player.participant.tried_cheap_taco = player.Tried_Cheap_Taco # Hot fork dishes
+        player.participant.tried_fancy_pizza = player.Tried_Fancy_Pizza # Meal 1: Sandwiches, Wraps and Uncrustables
+        player.participant.tried_cheap_pizza = player.Tried_Cheap_Pizza  # Meal 2: Hot Assorted Tarts
+        player.participant.tried_fancy_taco = player.Tried_Fancy_Taco # Meal 3: Individual Salads / Rice Paper Rolls
+        player.participant.tried_cheap_taco = player.Tried_Cheap_Taco # Meal 4: Hot fork dishes
         player.participant.start_time = time.time()
 
 

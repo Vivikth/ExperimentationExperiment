@@ -61,10 +61,10 @@ function checkSubmit(btn) {
     }
 
     var formValue = parseFloat(formInput);
-    if (formValue < 0 || formValue > 100) {
-        alert("Your switch-point must be between 0 and 100");
-    } else if (formValue < 1 && formValue > 0) {
-        if (confirm("Please double-check your switch-point. Remember that your switch-point is a percentage between 0 and 100. Press OK to proceed.")) {
+    if (formValue < 0 || formValue > 20) {
+        alert("Your switch-point must be between 0 and 20");
+    } else if (formValue < 20 && formValue > 0) {
+        if (confirm("Please double-check your switch-point. Remember that your switch-point is a dollar value between 0 and 20. Press OK to proceed.")) {
             sendDict[formName] = formValue;
             liveSend(sendDict);
             document.getElementsByClassName("nexttab ".concat(btn.name))[0].click();

@@ -28,14 +28,14 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     # Elicitation Variables
-    Fancy_Pizza_Value = models.FloatField(doc="Fancy_Pizza_Value", min=0, max=100,
-                                          label="Your switch point for the fancy pizza is:")
-    Cheap_Pizza_Value = models.FloatField(doc="Cheap_Pizza_Value", min=0, max=100,
-                                          label="Your switch point for the cheap pizza is:")
-    Fancy_Taco_Value = models.FloatField(doc="Fancy_Taco_Value", min=0, max=100,
-                                         label="Your switch point for the fancy taco is:")
-    Cheap_Taco_Value = models.FloatField(doc="Cheap_Taco_Value", min=0, max=100,
-                                         label="Your switch point for the cheap taco is:")
+    Fancy_Pizza_Value = models.FloatField(doc="Fancy_Pizza_Value", min=0, max=20,
+                                          label="Your switch point for meal 1 is:")
+    Cheap_Pizza_Value = models.FloatField(doc="Cheap_Pizza_Value", min=0, max=20,
+                                          label="Your switch point for meal 2 is:")
+    Fancy_Taco_Value = models.FloatField(doc="Fancy_Taco_Value", min=0, max=20,
+                                         label="Your switch point for meal 3 is:")
+    Cheap_Taco_Value = models.FloatField(doc="Cheap_Taco_Value", min=0, max=20,
+                                         label="Your switch point for meal 4 is:")
 
     Rand_T = models.StringField(choices=["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"])  # Foods
     Rand_Outcome = models.StringField(choices=["BW", "C"])  # Best, Worst Continue
@@ -130,7 +130,7 @@ def creating_session(subsession: Subsession):
         p.participant.rand_outcome = p.Rand_Outcome
         p.participant.BDM_Num = p.BDM_Num
         for tried in ['tried_fancy_pizza', 'tried_cheap_pizza', 'tried_fancy_taco', 'tried_cheap_taco', 'next_meal_day',
-                      'next_meal_time', 'next_meal_date']:
+                      'next_meal_time', 'next_meal_date', 'sample_meal_day', 'sample_meal_time', 'sample_meal_date']:
             if tried in p.session.config:
                 p.participant.vars[tried] = p.session.config[tried]
             else:
@@ -168,7 +168,8 @@ class InstructionPage(Page):
         if all(get_nullable(player, value) is not None for value in ['Fancy_Pizza_Value', 'Cheap_Pizza_Value',
                                                                      'Cheap_Taco_Value',
                                                                      'Fancy_Taco_Value']):
-            names = ['Fancy Pizza', 'Cheap Pizza', 'Cheap Taco', 'Fancy Taco']
+            names = ['Meal 1: Sandwiches, Wraps and Uncrustables', 'Meal 2: Hot Assorted Tarts',
+                     'Meal 3: Individual Salads/Rice Paper Rolls', 'Meal 4: Hot Fork Dish']
             values = [player.Fancy_Pizza_Value, player.Cheap_Pizza_Value, player.Cheap_Taco_Value,
                       player.Fancy_Taco_Value]
             return {player.id_in_group: sort_together([values, names])[1][::-1]}

@@ -7,29 +7,33 @@
 
 {% block content %}
 <p>
-    In this stage of the experiment, you will choose some foods to eat at the second session, and a sample to eat at this session. <br>
-    Instead of selecting foods directly, you will have to choose a <b>food-menu pair</b>. <br>
+    In this stage of the experiment, you will choose a sample to eat at the second session on {{player.participant.sample_meal_day}}
+    the {{player.participant.sample_meal_date}} and a menu for the third session on
+    {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}. <br>
+    Instead of selecting meals directly, you will have to choose a <b>sample-menu pair</b>. <br>
 </p>
 
-<h4>What are food-menu pairs?</h4>
+<h4>What is a sample-menu pair?</h4>
 <p>
-    A food-menu pair consists of a single food, and a list of foods. <br>
-    To complete a food-menu pair, you must first eat the single food at the end of this session. <br>
-    After eating the single food, you will be able to choose a food from the list at the second session and eat that food at the second session. <br>
+    A sample-menu pair consists of a single sample, and a list of meals. <br>
+    To complete a sample-menu pair, you must first eat the single sample at the second session. <br>
+    After eating the single sample, you will be able to choose a meal from the list at the third session and eat that meal
+    at the third session. <br>
 </p>
 
 <h4>What you need to do</h4>
 
 <p>
-    You will need to choose 2 food-menu pairs. <br>
-    I will randomly select one food-menu pair for you to complete.
+    You will need to choose 2 sample-menu pairs. <br>
+    I will randomly select one sample-menu pair for you to complete.
 </p>
 <br>
 
 
 <p>
-    Remember, the choices you make now will <b>affect</b> the food you eat at the second session, and the sample you eat at this session.<br>
-    Click the next button to choose your food-menu pairs. <br>
+    Remember, the choices you make now will <b>affect</b> the meal you eat at the third session, and the sample you eat
+    at the second session.<br>
+    Click the next button to choose your sample-menu pairs. <br>
 </p>
     {% next_button %}
 

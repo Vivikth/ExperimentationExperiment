@@ -2,7 +2,7 @@ import random
 from otree.api import *
 
 # from . import models
-from Global_Functions import list_subtract
+from Global_Functions import list_subtract, meal_name_from_task
 
 # Treatment, Pair1, pair2 are inputted before.
 
@@ -57,7 +57,8 @@ def creating_session(subsession):
             if 'rand_outcome' in player.session.config:
                 player.participant.rand_outcome = player.session.config['rand_outcome']
             # print(player.participant.treatment_used1)
-        for tried in ['next_meal_day', 'next_meal_time', 'next_meal_date']:
+        for tried in ['next_meal_day', 'next_meal_time', 'next_meal_date', 'sample_meal_day', 'sample_meal_time',
+                      'sample_meal_date']:
             if tried in player.session.config:
                 player.participant.vars[tried] = player.session.config[tried]
             else:
@@ -77,11 +78,12 @@ class BlunderTaskSelection(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        all_tasks = ["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"]
+        all_tasks = ['Meal 1: Sandwiches, Wraps and Uncrustables', 'Meal 2: Hot Assorted Tarts',
+                     'Meal 3: Individual Salads/Rice Paper Rolls', 'Meal 4: Hot Fork Dish']
         stage_for_template = "1st"
         version_for_template = "A"
-        good_task = player.participant.pair1[0]
-        bad_task = player.participant.pair1[1]
+        good_task = meal_name_from_task(player.participant.pair1[0])
+        bad_task = meal_name_from_task(player.participant.pair1[1])
         remaining_tasks = list_subtract(all_tasks, [good_task, bad_task])
         return {
             'Good_Task': good_task,
@@ -100,10 +102,10 @@ class ControlTaskSelection(Page):
     def vars_for_template(player: Player):
         stage_for_template = "1st"
         version_for_template = "A"
-        good_task = player.participant.pair1[0]
-        bad_task = player.participant.pair1[1]
-        task_info = player.participant.pair1[0]
-        other_task = player.participant.pair2[0]
+        good_task = meal_name_from_task(player.participant.pair1[0])
+        bad_task = meal_name_from_task(player.participant.pair1[1])
+        task_info = meal_name_from_task(player.participant.pair1[0])
+        other_task = meal_name_from_task(player.participant.pair2[0])
         return {
             'Good_Task': good_task,
             'Bad_Task': bad_task,
@@ -122,12 +124,13 @@ class ControlTaskSelection(Page):
 class RandomPick(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        all_tasks = ["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"]
-        good_task = player.participant.pair1[0]
-        bad_task = player.participant.pair1[1]
-        task_info = player.participant.pair1[0]
+        all_tasks = ['Meal 1: Sandwiches, Wraps and Uncrustables', 'Meal 2: Hot Assorted Tarts',
+                     'Meal 3: Individual Salads/Rice Paper Rolls', 'Meal 4: Hot Fork Dish']
+        good_task = meal_name_from_task(player.participant.pair1[0])
+        bad_task = meal_name_from_task(player.participant.pair1[1])
+        task_info = meal_name_from_task(player.participant.pair1[0])
         remaining_tasks = list_subtract(all_tasks, [good_task, bad_task])
-        other_task = player.participant.pair2[0]
+        other_task = meal_name_from_task(player.participant.pair2[0])
         BDM_Payout = player.participant.BDM_Num / 100 - 0.01
         return {
             'Good_Task': good_task,

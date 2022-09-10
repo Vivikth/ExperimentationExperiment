@@ -164,3 +164,16 @@ def bot_should_play_app(self, app):
             return bot_should_play_app(self, 'BDM')
         else:
             return bot_should_play_app(self, 'BDM')
+
+
+def meal_name_from_task(task):
+    """Returns meal name from a given task
+    """
+    if task == 'Fancy Pizza':
+        return "Meal 1: Sandwiches, Wraps and Uncrustables"
+    elif task == 'Cheap Pizza':
+        return "Meal 2: Hot Assorted Tarts"
+    elif task == 'Fancy Taco':
+        return "Meal 3: Individual Salads/Rice Paper Rolls"
+    elif task == 'Cheap Taco':
+        return "Meal 4: Hot Fork Dish"

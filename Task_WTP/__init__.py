@@ -2,7 +2,7 @@ from otree.api import *
 import random
 import time
 import settings
-from Global_Functions import value_function, list_subtract, find_min_diff
+from Global_Functions import value_function, list_subtract, find_min_diff, meal_name_from_task
 from more_itertools import sort_together
 
 # Make blunder menu options and control menu options.
@@ -113,7 +113,7 @@ def creating_session(subsession: Subsession):
             p.Rand_T = p.session.config['Rand_T']
         else:
             p.Rand_T = random.choice(["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"])
-        p.participant.rand_task = p.Rand_T
+        p.participant.rand_task = meal_name_from_task(p.Rand_T)
 
         # Generate continuation_rv to determine whether program should continue or do best / worst task
         if 'continuation_rv' in p.session.config:
@@ -166,12 +166,12 @@ class InstructionPage(Page):
             player.Cheap_Taco_Value = data['Cheap_Taco_Value']
 
         if all(get_nullable(player, value) is not None for value in ['Fancy_Pizza_Value', 'Cheap_Pizza_Value',
-                                                                     'Cheap_Taco_Value',
-                                                                     'Fancy_Taco_Value']):
+                                                                     'Fancy_Taco_Value',
+                                                                     'Cheap_Taco_Value']):
             names = ['Meal 1: Sandwiches, Wraps and Uncrustables', 'Meal 2: Hot Assorted Tarts',
                      'Meal 3: Individual Salads/Rice Paper Rolls', 'Meal 4: Hot Fork Dish']
-            values = [player.Fancy_Pizza_Value, player.Cheap_Pizza_Value, player.Cheap_Taco_Value,
-                      player.Fancy_Taco_Value]
+            values = [player.Fancy_Pizza_Value, player.Cheap_Pizza_Value, player.Fancy_Taco_Value,
+                      player.Cheap_Taco_Value]
             return {player.id_in_group: sort_together([values, names])[1][::-1]}
 
     @staticmethod

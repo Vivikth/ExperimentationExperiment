@@ -80,7 +80,7 @@ Here are the results from your switch-point procedure.
     {{ if player.participant.rand_outcome == "Yes_BDM" }}
 <p>
     One of the switch-point questions was selected. <br>
-    I randomly selected {{player.participant.rand_task}} as the food. <br>
+    I randomly selected {{player.participant.rand_task}} as the meal. <br>
     I randomly selected question number {{player.participant.BDM_Num}} as the question, which corresponds to ${{BDM_Payout|to2}}. <br>
     Your switch-point for this task was ${{ player.participant.switch_point|to2 }}. <br>
 </p>
@@ -88,15 +88,15 @@ Here are the results from your switch-point procedure.
         {{if player.participant.switch_point > player.participant.BDM_Num}}
     <p>
         Your switch-point was higher than the selected question. <br>
-        This means you said that you prefer eating the {{player.participant.rand_task}} to the money. <br>
-        You will be able to eat the {{player.participant.rand_task}} at the end of this session.
+        This means you said that you prefer eating {{player.participant.rand_task}} to the money. <br>
+        You will be able to eat {{player.participant.rand_task}} at the second session.
     </p>
         {{endif}}
 
         {{if player.participant.BDM_Num >= player.participant.switch_point }}
     <p>
         Your switch-point was lower than the selected question. <br>
-        This means you said that you prefer the money to eating the {{player.participant.rand_task}}. <br>
+        This means you said that you prefer the money to eating {{player.participant.rand_task}}. <br>
         You will receive the money at the end of this session.
     </p>
         {{endif}}
@@ -106,9 +106,8 @@ Here are the results from your switch-point procedure.
     {{ endif }}
 
 <p>
-    You will be able to complete your chosen food-menu pair shortly. <br>
+    You will be able to complete your chosen sample-menu pair at the next session. <br>
     To finish this session, you will need to complete a demographic survey.<br>
-    Afterwards, you will receive your chosen food sample. <br>
     Click the next button to continue to the survey <br>
 </p>
 

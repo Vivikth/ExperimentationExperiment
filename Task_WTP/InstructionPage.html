@@ -124,33 +124,6 @@ Applying the Switch-Point Procedure
                 {{ endwith }}
             {{endwith}}
 
-            {{ with Form_Value=form.Cheap_Taco_Value }}
-                <label style="font-size: 20px">  {{Form_Value.label }}</label>
-                <div class="form-group">
-                    <label style="text-align: right">$</label>
-                        <input type="number" step="any" id="cheap_taco_form" name="Cheap_Taco_Value" min="0" oninput="this.value =
-                                    !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
-                </div>
-                {{ formfield_errors 'Cheap_Taco_Value' }}
-            {{endwith}}
-
-            {{ include 'Task_WTP/Are_You_Sure.html' }}
-          <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
-      <button type="button" hidden onclick="topFunction()" id="cheap_taco_next_hidden" class="nexttab cheap_taco_form"></button>
-      <button onclick="checkSubmit(this)" type="button" id="cheap_taco_next" name="cheap_taco_form" class="btn-primary btn next">Next</button>
-  </div>
-
-  <div class="tab-pane" id="part4" role="tabpanel" aria-labelledby="part4-tab">
-            {{ with Task_name='Meal 4: Hot Fork Dishes' }}
-                {{with Task_description='Curry, rice, garden salad plus a fruit skewer' }}
-                {{with Allergen_information='Contains onion, garlic; may contain traces of nuts' }}
-                {{with Meal_number='Meal 4'}}
-                    {{ include 'Task_WTP/PrefElicit.html'}}
-                {{ endwith }}
-                {{ endwith }}
-                {{ endwith }}
-            {{endwith}}
-
             {{ with Form_Value=form.Fancy_Taco_Value }}
                 <label style="font-size: 20px">  {{Form_Value.label }}</label>
                 <div class="form-group">
@@ -165,6 +138,33 @@ Applying the Switch-Point Procedure
           <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
       <button type="button" hidden onclick="topFunction()" id="fancy_taco_next_hidden" class="nexttab fancy_taco_form"></button>
       <button onclick="checkSubmit(this)" type="button" id="fancy_taco_next" name="fancy_taco_form" class="btn-primary btn next">Next</button>
+  </div>
+
+  <div class="tab-pane" id="part4" role="tabpanel" aria-labelledby="part4-tab">
+            {{ with Task_name='Meal 4: Hot Fork Dishes' }}
+                {{with Task_description='Curry, rice, garden salad plus a fruit skewer' }}
+                {{with Allergen_information='Contains onion, garlic; may contain traces of nuts' }}
+                {{with Meal_number='Meal 4'}}
+                    {{ include 'Task_WTP/PrefElicit.html'}}
+                {{ endwith }}
+                {{ endwith }}
+                {{ endwith }}
+            {{endwith}}
+
+            {{ with Form_Value=form.Cheap_Taco_Value }}
+                <label style="font-size: 20px">  {{Form_Value.label }}</label>
+                <div class="form-group">
+                    <label style="text-align: right">$</label>
+                        <input type="number" step="any" id="cheap_taco_form" name="Cheap_Taco_Value" min="0" oninput="this.value =
+                                    !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+                {{ formfield_errors 'Cheap_Taco_Value' }}
+            {{endwith}}
+
+            {{ include 'Task_WTP/Are_You_Sure.html' }}
+          <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+      <button type="button" hidden onclick="topFunction()" id="cheap_taco_next_hidden" class="nexttab cheap_taco_form"></button>
+      <button onclick="checkSubmit(this)" type="button" id="cheap_taco_next" name="cheap_taco_form" class="btn-primary btn next">Next</button>
   </div>
 
 

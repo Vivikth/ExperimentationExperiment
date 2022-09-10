@@ -6,11 +6,13 @@
 {% endblock %}
 {% block content %}
 
-<p>INSTRUCTIONS FOR COLLECTING SAMPLE</p>
+<p> Make sure to bring your <b>university ID</b> to the second {{player.participant.sample_meal_time}} session at <b>Location
+    on {{player.participant.sample_meal_day}} the {{player.participant.sample_meal_date}}</b>.</p>
 
-<p> Make sure to bring your <b>STUFF</b> to the dinner session at <b>Location, Time</b></p>
+<p> Also, make sure to bring your <b>university ID</b> to the third {{player.participant.next_meal_time}} session at <b>Location
+    on {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}</b>.</p>
 
-
+<p>We will send a reminder closer to these dates</p>
     {% next_button %}
 {% endblock %}
 

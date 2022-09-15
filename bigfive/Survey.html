@@ -1,0 +1,45 @@
+{{ block title }}
+Personality test
+{{ endblock }}
+
+{{ block content }}
+
+<p>
+Here are a number of personality traits that may or may not apply to you. Please indicate the extent to which
+    <b>you agree or disagree with the statement "I see myself as...</b>".
+</p>
+<p> You should rate the extent to which the pair of traits applies to you, even if one characteristic applies more
+    strongly than the other.</p>
+
+
+<table class="table table-striped">
+    <tr>
+        <th></th>
+        <th>Disagree strongly</th>
+        <th>Disagree moderately</th>
+        <th>Disagree a little</th>
+        <th>Neither agree nor disagree</th>
+        <th>Agree a little</th>
+        <th>Agree moderately</th>
+        <th>Agree strongly</th>
+    </tr>
+    {{ for field in form }}
+    <tr>
+        <th>{{ field.label }}</th>
+        {{ for option in field }}
+        <td>{{ option }}</td>
+        {{ endfor }}
+    </tr>
+    {{ endfor }}
+</table>
+
+{{ next_button }}
+
+<script>
+    // workaround needed until wtforms #615 is published
+    for (let option of document.querySelectorAll('input[type=radio]')) {
+        option.required = 'required';
+    }
+</script>
+
+{{ endblock }}

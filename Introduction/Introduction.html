@@ -9,17 +9,30 @@
 
 <p>
     You are about to participate in an experiment on the economics of decision-making. <br>
-    If you <b>complete</b> this experiment, you will earn <b>${{ C.PAYMENT_AMOUNT }}</b>, which will be paid to you via PayPal at the end of the experiment. <br>
-    We will also provide you with a {{player.participant.sample_meal_time}} sample at the second session on {{player.participant.sample_meal_day}}
-    the {{player.participant.sample_meal_date}}, and a full {{player.participant.next_meal_time}} on
- {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}. <br>
+    The experiment consists of three sessions:
+</p>
+<ul>
+    <li> The current session </li>
+    <li> A second session at {{player.participant.sample_meal_time}}-time on {{player.participant.sample_meal_day}}
+    the {{player.participant.sample_meal_date}} </li>
+    <li> A third session at {{player.participant.next_meal_time}}-time on
+ {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}</li>
+</ul>
+</p>
+
+<p>
+    If you <b>complete</b> this experiment, you will earn a <b>minimum</b> of <b>${{ C.PAYMENT_AMOUNT }}</b>, which will be paid to you in cash at the second session. <br>
+    Depending on the choices you make in the experiment, you will receive one of the following:
+<ul>
+    <li> A sample at the second session and a full meal at the third session OR</li>
+    <li> A full meal at the second session OR </li>
+    <li> Additional cash at the second session </li>
+</ul>
     On average, I expect that the current session of the experiment will take approximately <b>X</b> minutes. <br>
 </p>
 <br>
 <h3> The Basic Idea </h3>
 <p>
-    This experiment has 3 sessions: the current session, a second session on {{player.participant.sample_meal_day}}
-    the {{player.participant.sample_meal_date}} and a third session on {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}.<br>
     All the choices you make in this experiment will determine the meals you are served at the second session and third sessions -
     so <i>choosing appropriately</i> will allow you to eat the foods you <b>prefer</b>. <br>
     You can click the text below to see the descriptions of each meal.
@@ -41,7 +54,7 @@
     Finally, you will answer a simple demographic survey at the end of the session. <br>
 </p>
 <p>
-    At the second session, you will be able to try your chosen lunch sample.
+    At the second session, you will be able to try your chosen lunch sample or meal.
     At the third session, you will be able to choose a meal from the {{player.participant.next_meal_time}} menu you
     chose in this session. <br>
     Please note that you will only be paid if you <b>complete</b> the demographic survey at the end of this session.

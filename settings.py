@@ -53,7 +53,7 @@ SESSION_CONFIGS = [
         name='Experiment',
         display_name='Experiment',
         num_demo_participants=1,
-        app_sequence=['Introduction', 'BDM', 'Task_WTP', 'Choice', 'Demog_Survey'],
+        app_sequence=['Introduction', 'BDM', 'Task_WTP', 'Choice', 'bret', 'bigfive', 'Demog_Survey'],
     ),
     dict(
         name='Intro_BOT',
@@ -105,7 +105,18 @@ SESSION_CONFIGS = [
         app_sequence=['Introduction', 'BDM', 'Task_WTP', 'Choice', 'Demog_Survey'],
         use_browser_bots=True,
     ),
-
+    dict(
+        name='Big_Five',
+        display_name='Big Five',
+        num_demo_participants=1,
+        app_sequence=['bigfive'],
+    ),
+    dict(
+        name='bret',
+        display_name='bret',
+        num_demo_participants=1,
+        app_sequence=['bret'],
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -136,8 +147,8 @@ PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks'
 LANGUAGE_CODE = 'en'
 
 # e.g. EUR, GBP, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'USD'
-USE_POINTS = True
+REAL_WORLD_CURRENCY_CODE = 'AUD'
+USE_POINTS = False
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable

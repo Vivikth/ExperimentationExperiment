@@ -56,6 +56,10 @@ def creating_session(subsession):
                 player.participant.BDM_Num = player.session.config['BDM_Num']
             if 'rand_outcome' in player.session.config:
                 player.participant.rand_outcome = player.session.config['rand_outcome']
+            if 'rand_task' in player.session.config:
+                player.participant.rand_task = meal_name_from_task(player.session.config['rand_task'])
+            if 'switch_point' in player.session.config:
+                player.participant.switch_point = player.session.config['switch_point']
             # print(player.participant.treatment_used1)
         for tried in ['next_meal_day', 'next_meal_time', 'next_meal_date', 'sample_meal_day', 'sample_meal_time',
                       'sample_meal_date']:
@@ -138,7 +142,7 @@ class RandomPick(Page):
             'Other_Task': other_task,
             'Task_Info': task_info,
             'remaining_tasks': remaining_tasks,
-            'BDM_Payout': BDM_Payout
+            'BDM_Payout': BDM_Payout,
         }
 
     # @staticmethod

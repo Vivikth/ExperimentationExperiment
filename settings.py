@@ -42,6 +42,10 @@ SESSION_CONFIGS = [
         app_sequence=['Choice'],
         pair1=["Fancy Pizza", "Cheap Taco"],
         pair2=["Fancy Taco", "Cheap Pizza"],
+        BDM_Num=1000,
+        rand_task="Fancy Pizza",
+        rand_outcome="Yes_BDM",
+        switch_point=8,
     ),
     dict(
         name='Demog_Survey',

@@ -28,11 +28,40 @@ ul { display: inline-block; text-align: left; }
 </style>
 
 <p>
-    Thank you for choosing your version food-menu pairs.
-    I randomly selected your  choice.
-    This means you will have to complete the following food-menu pair:
+    Thank you for choosing your sample-menu pairs.
+    {{ if player.participant.rand_outcome == "Yes_BDM" }}
+<p>
+    I randomly selected a switch-point question, which means you will not be able to complete one of the chosen sample-menu pairs. <br>
+    I randomly selected {{player.participant.rand_task}} as the meal. <br>
+    I randomly selected question number {{player.participant.BDM_Num}} as the question, which corresponds to ${{BDM_Payout|to2}}. <br>
+    Your switch-point for this task was ${{ player.participant.switch_point|to2 }}. <br>
 </p>
+<br>
+        {{if player.participant.switch_point > BDM_Payout}}
+    <p>
+        Your switch-point was higher than the selected question. <br>
+        This means you said that you prefer eating {{player.participant.rand_task}} to the money. <br>
+        You will be able to eat {{player.participant.rand_task}} at the second session, and do not need to return to the third session.
+    </p>
+        {{endif}}
 
+        {{if BDM_Payout >= player.participant.switch_point }}
+    <p>
+        Your switch-point was lower than the selected question. <br>
+        This means you said that you prefer the money to eating {{player.participant.rand_task}}. <br>
+        You will receive the money at the second session, and do not need to return to the third session.
+    </p>
+        {{endif}}
+
+    <br>
+
+    {{ endif }}
+
+
+
+{{ if player.participant.rand_outcome == "No_BDM" }}
+I randomly selected the following sample-menu pair, and did not select a switch-point question.<br>
+This means you will need to complete the following sample-menu pair: <br>
 {{ if player.participant.treatment_used1 == 'Blunder'}}
     {{ if player.Blunder_Task_Choice == "Option 1" }}
         <div class = "opt1">
@@ -66,49 +95,11 @@ ul { display: inline-block; text-align: left; }
         {{ endif }}
     {% endwith %}
 {{ endif }}
-
-
-<br>
-Here are the results from your switch-point procedure.
-
-    {{ if player.participant.rand_outcome == "No_BDM" }}
-<p>
-    None of the switch-point questions were selected. <br>
-</p>
-    {{ endif }}
-
-    {{ if player.participant.rand_outcome == "Yes_BDM" }}
-<p>
-    One of the switch-point questions was selected. <br>
-    I randomly selected {{player.participant.rand_task}} as the meal. <br>
-    I randomly selected question number {{player.participant.BDM_Num}} as the question, which corresponds to ${{BDM_Payout|to2}}. <br>
-    Your switch-point for this task was ${{ player.participant.switch_point|to2 }}. <br>
-</p>
-<br>
-        {{if player.participant.switch_point > player.participant.BDM_Num}}
-    <p>
-        Your switch-point was higher than the selected question. <br>
-        This means you said that you prefer eating {{player.participant.rand_task}} to the money. <br>
-        You will be able to eat {{player.participant.rand_task}} at the second session.
-    </p>
-        {{endif}}
-
-        {{if player.participant.BDM_Num >= player.participant.switch_point }}
-    <p>
-        Your switch-point was lower than the selected question. <br>
-        This means you said that you prefer the money to eating {{player.participant.rand_task}}. <br>
-        You will receive the money at the end of this session.
-    </p>
-        {{endif}}
-
-    <br>
-
-    {{ endif }}
+{{ endif }}
 
 <p>
-    You will be able to complete your chosen sample-menu pair at the next session. <br>
     To finish this session, you will need to complete a demographic survey.<br>
-    Click the next button to continue to the survey <br>
+    Click the next button to continue. <br>
 </p>
 
 <br> <br>

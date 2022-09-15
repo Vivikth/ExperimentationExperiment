@@ -1,0 +1,36 @@
+<br>
+Here are the results from your switch-point procedure.
+
+    {{ if player.participant.rand_outcome == "No_BDM" }}
+<p>
+    None of the switch-point questions were selected. <br>
+</p>
+    {{ endif }}
+
+    {{ if player.participant.rand_outcome == "Yes_BDM" }}
+<p>
+    One of the switch-point questions was selected. <br>
+    I randomly selected {{player.participant.rand_task}} as the meal. <br>
+    I randomly selected question number {{player.participant.BDM_Num}} as the question, which corresponds to ${{BDM_Payout|to2}}. <br>
+    Your switch-point for this task was ${{ player.participant.switch_point|to2 }}. <br>
+</p>
+<br>
+        {{if player.participant.switch_point > player.participant.BDM_Num}}
+    <p>
+        Your switch-point was higher than the selected question. <br>
+        This means you said that you prefer eating {{player.participant.rand_task}} to the money. <br>
+        You will be able to eat {{player.participant.rand_task}} at the second session.
+    </p>
+        {{endif}}
+
+        {{if player.participant.BDM_Num >= player.participant.switch_point }}
+    <p>
+        Your switch-point was lower than the selected question. <br>
+        This means you said that you prefer the money to eating {{player.participant.rand_task}}. <br>
+        You will receive the money at the end of this session.
+    </p>
+        {{endif}}
+
+    <br>
+
+    {{ endif }}

@@ -121,7 +121,7 @@ def creating_session(subsession: Subsession):
         else:
             continuation_rv = random.random()
 
-        if continuation_rv <= 0.5:  # If BDM is to be implemented (50% probability)
+        if continuation_rv <= 0.2:  # If BDM is to be implemented (20% probability)
             p.Rand_Outcome = "Yes_BDM"
             p.BDM_Num = random.randint(1, 2001)  # BDM Question Number to select
         else:

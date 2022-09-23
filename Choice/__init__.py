@@ -76,7 +76,7 @@ class RetChoiceIntroduction(Page):
         return 'stage' not in player.participant.vars
 
 
-class BlunderTaskSelection(Page):
+class FirstChoice(Page):
     form_model = 'player'
     form_fields = ['Blunder_Task_Choice']
 
@@ -98,7 +98,7 @@ class BlunderTaskSelection(Page):
         }
 
 
-class ControlTaskSelection(Page):
+class SecondChoice(Page):
     form_model = 'player'
     form_fields = ['Control_Task_Choice']
 
@@ -168,7 +168,7 @@ class RandomPick(Page):
     #         return task_name_decoder(task_name(player.participant.pair[opt_choice1])) + player.participant.stage
 
 
-page_sequence = [RetChoiceIntroduction, BlunderTaskSelection, ControlTaskSelection, RandomPick]
+page_sequence = [RetChoiceIntroduction, FirstChoice, SecondChoice, RandomPick]
 
 
 # def custom_export(players):

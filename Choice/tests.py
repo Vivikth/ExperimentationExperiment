@@ -30,6 +30,6 @@ class PlayerBot(Bot):
             if blunder_tremble_draw < self.case['tremble_prob']:
                 blunder_choice = 3 - blunder_choice
 
-            yield BlunderTaskSelection, dict(Blunder_Task_Choice="Option %i" % blunder_choice)
-            yield ControlTaskSelection, dict(Control_Task_Choice="Option %i" % control_choice)
+            yield FirstChoice, dict(Blunder_Task_Choice="Option %i" % blunder_choice)
+            yield SecondChoice, dict(Control_Task_Choice="Option %i" % control_choice)
             yield RandomPick

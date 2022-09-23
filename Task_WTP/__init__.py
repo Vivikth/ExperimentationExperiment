@@ -28,18 +28,18 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     # Elicitation Variables
-    Fancy_Pizza_Value = models.FloatField(doc="Fancy_Pizza_Value", min=0, max=20,
+    Fancy_Pizza_Value = models.FloatField(doc="Fancy_Pizza_Value", min=0, max=30,
                                           label="Your switch point for meal 1 is:")
-    Cheap_Pizza_Value = models.FloatField(doc="Cheap_Pizza_Value", min=0, max=20,
+    Cheap_Pizza_Value = models.FloatField(doc="Cheap_Pizza_Value", min=0, max=30,
                                           label="Your switch point for meal 2 is:")
-    Fancy_Taco_Value = models.FloatField(doc="Fancy_Taco_Value", min=0, max=20,
+    Fancy_Taco_Value = models.FloatField(doc="Fancy_Taco_Value", min=0, max=30,
                                          label="Your switch point for meal 3 is:")
-    Cheap_Taco_Value = models.FloatField(doc="Cheap_Taco_Value", min=0, max=20,
+    Cheap_Taco_Value = models.FloatField(doc="Cheap_Taco_Value", min=0, max=30,
                                          label="Your switch point for meal 4 is:")
 
     Rand_T = models.StringField(choices=["Fancy Pizza", "Cheap Pizza", "Fancy Taco", "Cheap Taco"])  # Foods
     Rand_Outcome = models.StringField(choices=["BW", "C"])  # Best, Worst Continue
-    BDM_Num = models.IntegerField(min=1, max=2001)
+    BDM_Num = models.IntegerField(min=1, max=3001)
 
 
 class Trial(ExtraModel):
@@ -123,7 +123,7 @@ def creating_session(subsession: Subsession):
 
         if continuation_rv <= 0.2:  # If BDM is to be implemented (20% probability)
             p.Rand_Outcome = "Yes_BDM"
-            p.BDM_Num = random.randint(1, 2001)  # BDM Question Number to select
+            p.BDM_Num = random.randint(1, 3001)  # BDM Question Number to select
         else:
             p.Rand_Outcome = "No_BDM"  # If best / worst task is not selected.
             p.BDM_Num = 0  # These are placeholder values - they will never be accessed.

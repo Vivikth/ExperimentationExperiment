@@ -11,7 +11,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'Introduction'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    PAYMENT_AMOUNT = 5  # May need to be updated later on
+    PAYMENT_AMOUNT = 10  # May need to be updated later on
 
 
 class Subsession(BaseSubsession):

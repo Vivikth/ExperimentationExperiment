@@ -7,9 +7,9 @@ font-weight: normal;
 
 
 <p>
-    In this stage of the experiment, I want to determine how much you value each meal. <br>
-    I'll use the switch-point procedure to determine how much you value each meal based on its description. <br>
-    I've put information about the switch-point procedure at the bottom of the page if you'd like to refer back to it. <br>
+    In this stage of the experiment, we want to determine how much you value each meal. <br>
+    We will use the switch-point procedure to determine how much you value each meal based on its description. <br>
+    We have put information about the switch-point procedure at the bottom of the page if you'd like to refer back to it. <br>
 </p>
 <br>
 
@@ -19,20 +19,20 @@ font-weight: normal;
     The allergen information is: <strong> {{Allergen_information}}</strong>. <br>
 </p>
 <p>
-    <b>Option A</b> means you eat {{Meal_number}} at the second session on {{player.participant.sample_meal_day}} the
+    <b>Option A</b> means you eat {{Meal_number}} at the third session on {{player.participant.sample_meal_day}} the
     {{player.participant.sample_meal_date}}, and complete the rest of this session. <br>
-    <b>Option B</b> means you get the money at second session on {{player.participant.sample_meal_day}} the
+    <b>Option B</b> means you get the money at the third session on {{player.participant.next_meal_day}} the
     {{player.participant.sample_meal_date}}, and complete the rest of this session.
 </p>
 <p>
-    I will ask you the following questions. <br>
+    We will ask you the following questions. <br>
     Note: There is a <b>20%</b> chance that one of the questions in this stage will be selected.
 </p>
 <br>
 {{ include 'Task_WTP/Task_BDMQs.html' }}
 <br>
 <p>
-    To save time, I'll just ask you for your <b>switch-point</b>: the monetary amount at which you would switch from option A to option B. <br>
+    To save time, we will just ask you for your <b>switch-point</b>: the monetary amount at which you would switch from option A to option B. <br>
     Please enter your answer as a number (i.e a number between 0.00 and 20.00). <br>
 </p>
 

@@ -106,7 +106,7 @@ SESSION_CONFIGS = [
         name='Experiment_BOT',
         display_name='Experiment_BOT',
         num_demo_participants=1,
-        app_sequence=['Introduction', 'BDM', 'Task_WTP', 'Choice', 'Demog_Survey'],
+        app_sequence=['Introduction', 'BDM', 'Task_WTP', 'Choice', 'bret', 'bigfive', 'Demog_Survey'],
         use_browser_bots=True,
     ),
     dict(
@@ -121,6 +121,21 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['bret'],
     ),
+    dict(
+        name='bret_BOT',
+        display_name='bret_BOT',
+        num_demo_participants=1,
+        app_sequence=['bret'],
+        use_browser_bots=True,
+    ),
+    dict(
+        name='Big_Five_BOT',
+        display_name='Big_Five_BOT',
+        num_demo_participants=1,
+        app_sequence=['bigfive'],
+        use_browser_bots=True,
+    ),
+
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -143,6 +158,7 @@ PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks'
                       'treatment_used1', 'blunder_choice', 'control_choice',  # Choice
                       'pair', 'stage', 'task_to_complete', 'opt_choice1', 'opt_choice2',  # Dynamic Vars
                       'uniID', 'sample_meal_day', 'sample_meal_date', 'sample_meal_time',
+                      'bret_payoff',
                       'next_meal_day', 'next_meal_date', 'next_meal_time']  # ID Vars
 
 

@@ -106,7 +106,9 @@ global_cases_dict = {'Introduction': ['all_correct'],
                      'BDM': ['success'],
                      'Task_WTP': ['random'],
                      'Exp_Prob': [[0.3, 0.5, 0.1, 0.1]],  # [(O1,O1), (O1,O2), (O2, O1), (O2,O2)]
-                     'tremble_prob': [0.05]}
+                     'tremble_prob': [0.05],
+                     'bomb': ['always_bomb', 'never_bomb']
+                     }
 
 
 # global_cases_dict = {'detect_mobile': ['non_mobile', 'mobile'],  # Full version
@@ -159,11 +161,12 @@ def bot_should_play_app(self, app):
         return bot_should_play_app(self, 'BDM')
     if app == 'Choice':
         return bot_should_play_app(self, 'Task_WTP')
+    if app == 'bret':
+        return bot_should_play_app(self, 'Choice')
+    if app == 'bigfive':
+        return bot_should_play_app(self, 'bret')
     if app == 'Demog_Survey' or app == 'payment_info':
-        if 'path' not in self.player.participant.vars:  # Depends if we want to test survey alone
-            return bot_should_play_app(self, 'BDM')
-        else:
-            return bot_should_play_app(self, 'BDM')
+        return bot_should_play_app(self, 'bigfive')
 
 
 def meal_name_from_task(task):

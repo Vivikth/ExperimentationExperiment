@@ -12,8 +12,8 @@ class PlayerBot(Bot):
         if bot_should_play_app(self, Constants.name_in_url):
             yield WtpIntro
             yield Submission(InstructionPage, dict(
-                Fancy_Pizza_Value=random.randint(0, 100),
-                Cheap_Pizza_Value=random.randint(0, 100),
-                Fancy_Taco_Value=random.randint(0, 100),
-                Cheap_Taco_Value=random.randint(0, 100)))
+                Fancy_Pizza_Value=random.randint(0, 30),
+                Cheap_Pizza_Value=random.randint(0, 30),
+                Fancy_Taco_Value=random.randint(0, 30),
+                Cheap_Taco_Value=random.randint(0, 30)))
             yield WtpConc

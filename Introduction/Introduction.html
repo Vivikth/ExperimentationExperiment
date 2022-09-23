@@ -9,31 +9,37 @@
 
 <p>
     You are about to participate in an experiment on the economics of decision-making. <br>
-    The experiment consists of three sessions:
+    The experiment consists of up to three sessions:
 </p>
 <ul>
-    <li> The current session </li>
+    <li> The current session (online) </li>
     <li> A second session at {{player.participant.sample_meal_time}}-time on {{player.participant.sample_meal_day}}
     the {{player.participant.sample_meal_date}} </li>
     <li> A third session at {{player.participant.next_meal_time}}-time on
  {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}</li>
 </ul>
+All subjects will be required to complete the first and third sessions, but some subjects will not need to complete the
+second session.
 </p>
 
 <p>
-    If you <b>complete</b> this experiment, you will earn a <b>minimum</b> of <b>${{ C.PAYMENT_AMOUNT }}</b>, which will be paid to you in cash at the second session. <br>
-    Depending on the choices you make in the experiment, you will receive one of the following:
+    If you <b>complete</b> this experiment, you will earn a <b>minimum</b> of <b>${{ C.PAYMENT_AMOUNT }}</b>,
+    which will be paid to you in cash at the third session. <br>
+    Depending on the choices you make today, you will receive one of the following:
 <ul>
-    <li> A sample at the second session and a full meal at the third session OR</li>
-    <li> A full meal at the second session OR </li>
-    <li> Additional cash at the second session </li>
+    <li> A food sample plus $10 at the second session and a full meal plus at least $10 at the third session OR</li>
+    <li> A full meal plus at least $10 at the third session OR </li>
+    <li> At least $10 plus an additional cash payment at the third session </li>
 </ul>
+    Please note that you will not be required nor forced to eat any of the foods in this experiment. The foods have been
+chosen such that you should want to eat them (a free lunch!).</p> <br>
+<p>
     On average, I expect that the current session of the experiment will take approximately <b>X</b> minutes. <br>
 </p>
 <br>
 <h3> The Basic Idea </h3>
 <p>
-    All the choices you make in this experiment will determine the meals you are served at the second session and third sessions -
+    All the choices you make today will determine the food you are served at the second session and third sessions -
     so <i>choosing appropriately</i> will allow you to eat the foods you <b>prefer</b>. <br>
     You can click the text below to see the descriptions of each meal.
 </p>
@@ -47,25 +53,34 @@
 
 <h3>What's Next?</h3>
 <p>
-    The current session has 3 stages. <br>
+    The current session has 4 stages. <br>
     First, I will ask you some questions about how much you value the different meals. <br>
     Afterwards, you will choose a lunch sample for the second session and a
     {{player.participant.next_meal_time}} menu for the third session from a specified list. <br>
-    Finally, you will answer a simple demographic survey at the end of the session. <br>
+    Third, you will complete a box choice task to earn a bonus payment. <br>
+    Finally, you will answer some simple questions about yourself at the end of the session. <br>
 </p>
 <p>
-    At the second session, you will be able to try your chosen lunch sample or meal.
+    At the second session, you will be able to try your chosen lunch sample (if applicable).
     At the third session, you will be able to choose a meal from the {{player.participant.next_meal_time}} menu you
     chose in this session. <br>
-    Please note that you will only be paid if you <b>complete</b> the demographic survey at the end of this session.
+    Please note that you will only be paid if you <b>complete</b> all parts of this experiment.
 </p>
+
+<h3>Calculation of earnings</h3>
+
+<p>You will be paid (in a combination of food and money) based on either your decisions in Part 1, or Part 2 (but not both). There is a 20% chance
+that Part 1 will be used to calculate your earnings, and an 80% chance that Part 2 will be chosen. </p>
+
+<p>In <b>addition</b> you will also be paid for your choices in Part 3. Part 4 does not affect your payment,
+but you are still required to complete Part 4 in order to complete the experiment.</p>
 
 <h3>Quick Questions</h3>
 <p>
     Before moving on, please answer the following questions.
 </p>
 
-    <label>   How much will you be paid if you <b>complete</b> the demographic survey?</label>
+    <label>   What is the <b>minimum</b> amount that you will paid for this experiment?</label>
 <div>
     <label>$</label>
     <input name="payment_question">

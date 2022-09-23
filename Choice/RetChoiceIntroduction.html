@@ -2,12 +2,12 @@
 {% load otree static %}
 
 {% block title %}
-    Choose tasks to complete
+    Part 2
 {% endblock %}
 
 {% block content %}
 <p>
-    In this stage of the experiment, you will choose a sample to eat at the second session on {{player.participant.sample_meal_day}}
+    In this part of the experiment, you will choose a sample to eat at the second session on {{player.participant.sample_meal_day}}
     the {{player.participant.sample_meal_date}} and a menu for the third session on
     {{player.participant.next_meal_day}} the {{player.participant.next_meal_date}}. <br>
     Instead of selecting meals directly, you will have to choose a <b>sample-menu pair</b>. <br>
@@ -15,9 +15,9 @@
 
 <h4>What is a sample-menu pair?</h4>
 <p>
-    A sample-menu pair consists of a single sample, and a list of meals. <br>
+    A sample-menu pair consists of a single sample, and a list of meals (a menu). <br>
     To complete a sample-menu pair, you must first eat the single sample at the second session. <br>
-    After eating the single sample, you will be able to choose a meal from the list at the third session and eat that meal
+    After eating the single sample, you will be able to choose a meal from the menu and eat that meal
     at the third session. <br>
 </p>
 
@@ -25,7 +25,7 @@
 
 <p>
     You will need to choose 2 sample-menu pairs. <br>
-    I will randomly select one sample-menu pair for you to complete.
+    With an 80% probability, we will randomly select one of the two sample-menu pairs to be the one that you eat.
 </p>
 <br>
 

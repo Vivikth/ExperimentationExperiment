@@ -31,9 +31,9 @@ ul { display: inline-block; text-align: left; }
     Thank you for choosing your sample-menu pairs.
     {{ if player.participant.rand_outcome == "Yes_BDM" }}
 <p>
-    I randomly selected a switch-point question, which means you will not be able to complete one of the chosen sample-menu pairs. <br>
-    I randomly selected {{player.participant.rand_task}} as the meal. <br>
-    I randomly selected question number {{player.participant.BDM_Num}} as the question, which corresponds to ${{BDM_Payout|to2}}. <br>
+    We randomly selected a switch-point question, which means you will not be able to complete one of the chosen sample-menu pairs. <br>
+    We randomly selected {{player.participant.rand_task}} as the meal. <br>
+    We randomly selected question number {{player.participant.BDM_Num}} as the question, which corresponds to ${{BDM_Payout|to2}}. <br>
     Your switch-point for this task was ${{ player.participant.switch_point|to2 }}. <br>
 </p>
 <br>
@@ -41,7 +41,7 @@ ul { display: inline-block; text-align: left; }
     <p>
         Your switch-point was higher than the selected question. <br>
         This means you said that you prefer eating {{player.participant.rand_task}} to the money. <br>
-        You will be able to eat {{player.participant.rand_task}} at the second session, and do not need to return to the third session.
+        You will be able to eat {{player.participant.rand_task}} at the third session, and do not need to attend the second session.
     </p>
         {{endif}}
 
@@ -49,7 +49,7 @@ ul { display: inline-block; text-align: left; }
     <p>
         Your switch-point was lower than the selected question. <br>
         This means you said that you prefer the money to eating {{player.participant.rand_task}}. <br>
-        You will receive the money at the second session, and do not need to return to the third session.
+        You will receive the money at the third session, and do not need to attend the second session.
     </p>
         {{endif}}
 
@@ -60,14 +60,14 @@ ul { display: inline-block; text-align: left; }
 
 
 {{ if player.participant.rand_outcome == "No_BDM" }}
-I randomly selected the following sample-menu pair, and did not select a switch-point question.<br>
+We randomly selected the following sample-menu pair, and did not select a switch-point question.<br>
 This means you will need to complete the following sample-menu pair: <br>
 {{ if player.participant.treatment_used1 == 'Blunder'}}
     {{ if player.Blunder_Task_Choice == "Option 1" }}
         <div class = "opt1">
         <p>
-            Eat the <strong>{{Good_Task}}</strong> at the end of this session. <br>
-            After eating the <strong>{{Good_Task}}</strong>, you must choose <strong>one</strong> of the following foods to eat at the dinner session:
+            Eat the <strong>{{Good_Task}}</strong> at the second session. <br>
+            After eating the <strong>{{Good_Task}}</strong>, you must choose <strong>one</strong> of the following foods to eat at the third session:
         </p>
             <ul>
                 <li>{{remaining_tasks.0}}</li>
@@ -77,8 +77,8 @@ This means you will need to complete the following sample-menu pair: <br>
     {{ else }}
         <div class = "opt2">
         <p>
-            Eat the <strong>{{Bad_Task}}</strong> at the end of this session. <br>
-            After eating the <strong>{{Bad_Task}}</strong>, you must choose <strong>one</strong> of the following foods to eat at the dinner session:
+            Eat the <strong>{{Bad_Task}}</strong> at the second session. <br>
+            After eating the <strong>{{Bad_Task}}</strong>, you must choose <strong>one</strong> of the following foods to eat at the third session:
         </p>
             <ul>
                 <li>{{remaining_tasks.0}}</li>
@@ -98,7 +98,7 @@ This means you will need to complete the following sample-menu pair: <br>
 {{ endif }}
 
 <p>
-    To finish this session, you will need to answer some questions.<br>
+    To finish this session, you will need to complete Parts 3 and 4.<br>
     Click the next button to continue. <br>
 </p>
 

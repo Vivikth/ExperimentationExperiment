@@ -2,7 +2,68 @@
 Part 1: Introduction to the switch-point procedure
 {{ endblock }}
 {{ block content }}
-<h2>VIDEO INSTRUCTIONS MAY BE ADDED LATER</h2>
+<h3>Please watch the video below for instructions</h3>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player"></div>
+
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: '9WoETTV_3Wo',
+          rel : 0,
+          playerVars: {
+            'playsinline': 1,
+            'rel':0,
+          },
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+    function onPlayerStateChange(event) {
+        if(event.data === 0) {
+            document.getElementById("div1").style.visibility = "visible";
+            document.getElementById("NextHead").style.visibility = "hidden";
+        }
+    }
+
+    window.onload = function () {
+        if (localStorage.getItem("hasBDMCodeRunBefore") === null) {
+            document.getElementById("div1").style.visibility = "hidden";
+            localStorage.setItem("hasBDMCodeRunBefore", true);
+        } else {
+            document.getElementById("div1").style.visibility = "visible";
+            document.getElementById("NextHead").style.visibility = "hidden";
+        }
+    }
+    function loadNewVid(vidID){
+        player.destroy();
+        playerParams.videoId = vidID;
+        player = new YT.Player('player', playerParams);
+    }
+    </script>
 <h2>Text instructions</h2>
 {{ include 'BDM/BDM_Info.html' }}
 
@@ -15,8 +76,12 @@ Part 1: Introduction to the switch-point procedure
     Press the next button to continue.
 </p>
 
-    {{ formfields }}
-    {{ next_button }}
+
+<div id="div1" style="visibility: hidden;">
+        {% next_button %}
+</div>
+
+<h2 id="NextHead">Next Button will appear once video has been watched </h2>
 
 
 {{ endblock }}

@@ -135,15 +135,23 @@ class RandomPick(Page):
         task_info = meal_name_from_task(player.participant.pair1[0])
         remaining_tasks = list_subtract(all_tasks, [good_task, bad_task])
         other_task = meal_name_from_task(player.participant.pair2[0])
-        BDM_Payout = player.participant.BDM_Num / 100 - 0.01
+        bdm_payout = player.participant.BDM_Num / 100 - 0.01
         return {
             'Good_Task': good_task,
             'Bad_Task': bad_task,
             'Other_Task': other_task,
             'Task_Info': task_info,
             'remaining_tasks': remaining_tasks,
-            'BDM_Payout': BDM_Payout,
+            'BDM_Payout': bdm_payout,
         }
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.participant.BDM_Payout = player.participant.BDM_Num / 100 - 0.01
+        if player.participant.rand_outcome == "Yes_BDM":
+            if player.participant.BDM_Payout >= player.participant.switch_point:
+                player.participant.payoff += player.participant.BDM_Payout
+
 
     # @staticmethod
     # def before_next_page(player: Player, timeout_happened):

@@ -222,5 +222,16 @@ class Results(Page):
             **which_language,
         )
 
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        participant = player.participant
+        total_payoff = sum([p.payoff for p in player.in_all_rounds()])
+        participant.vars['bret_payoff'] = total_payoff
+        participant.payoff += total_payoff
+        participant.r1_boxes = player.in_round(1).boxes_collected
+        participant.r2_boxes = player.in_round(2).boxes_collected
+        participant.r1_bomb = player.in_round(1).bomb
+        participant.r2_bomb = player.in_round(2).bomb
+
 
 page_sequence = [Instructions, Game, Results]

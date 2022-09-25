@@ -74,6 +74,7 @@ def creating_session(subsession):
         player.participant.sample_meal_day = player.session.config["sample_meal_day"]
         player.participant.sample_meal_time = player.session.config["sample_meal_time"]
         player.participant.sample_meal_date = player.session.config["sample_meal_date"]
+        player.participant.payoff = 0  # initialise payoff value
 
 
 # PAGES

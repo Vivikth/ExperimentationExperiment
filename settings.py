@@ -153,12 +153,14 @@ PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks'
                       # Tried before variables
                       'BDM_Score', 'Q1_Correct', 'Q2_Correct', 'Q3_Correct', 'Q4_Correct', 'Q5_Correct',  # BDM
                       'Fancy_Pizza_Value', 'Cheap_Pizza_Value', 'Fancy_Taco_Value',  # Task_WTP
-                      'Cheap_Taco_Value',
+                      'Cheap_Taco_Value', 'BDM_Payout',
                       'pair1', 'pair2', 'rand_task', 'rand_outcome', 'BDM_Num', 'switch_point',
                       'treatment_used1', 'blunder_choice', 'control_choice',  # Choice
                       'pair', 'stage', 'task_to_complete', 'opt_choice1', 'opt_choice2',  # Dynamic Vars
                       'uniID', 'sample_meal_day', 'sample_meal_date', 'sample_meal_time',
-                      'bret_payoff',
+                      'bret_payoff', 'r1_boxes', 'r2_boxes', 'r1_bomb', 'r2_bomb',  # Risk task
+                      'b5q1', 'b5q2', 'b5q3', 'b5q4', 'b5q5', 'b5q6', 'b5q7', 'b5q8', 'b5q9', 'b5q10',  # bigfive
+                      'extraversion', 'agreeableness', 'conscientiousness', 'emotionally_stable', 'openness',
                       'next_meal_day', 'next_meal_date', 'next_meal_time']  # ID Vars
 
 

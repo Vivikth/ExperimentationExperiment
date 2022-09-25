@@ -56,6 +56,15 @@ class Survey(Page):
         player.emotionally_stable = combine_score(player.q9, player.q4)
         player.openness = combine_score(player.q5, player.q10)
 
+        participant_vals = ['b5q1', 'b5q2', 'b5q3', 'b5q4', 'b5q5', 'b5q6', 'b5q7', 'b5q8', 'b5q9', 'b5q10',  # bigfive
+                            'extraversion', 'agreeableness', 'conscientiousness', 'emotionally_stable', 'openness']
+        player_vals = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10',
+                       'extraversion', 'agreeableness', 'conscientiousness', 'emotionally_stable', 'openness']
+
+        for g_val, p_val in zip(participant_vals, player_vals):
+            exec("player.participant.%s = player.%s" % (g_val, p_val))  # Because otree doesn't allow dynamic access
+            # to player fields
+
 
 class Results(Page):
     pass

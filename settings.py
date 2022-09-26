@@ -135,7 +135,13 @@ SESSION_CONFIGS = [
         app_sequence=['bigfive'],
         use_browser_bots=True,
     ),
-
+    dict(
+        name='Big_Bot_test',
+        display_name='Big_Bot_test',
+        num_demo_participants=100,
+        app_sequence=['Introduction', 'BDM', 'Task_WTP', 'Choice', 'bret', 'bigfive', 'Demog_Survey'],
+        use_browser_bots=True,
+    )
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -145,7 +151,8 @@ SESSION_CONFIGS = [
 
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=0.00, doc="", next_meal_day="Tuesday", next_meal_time="lunch",
-    next_meal_date="18th October", sample_meal_day="Tuesday", sample_meal_time="lunch", sample_meal_date="11th October"
+    next_meal_date="18th October", sample_meal_day="Tuesday", sample_meal_time="lunch", sample_meal_date="11th October",
+    session_label="DUMMY",
 )
 
 PARTICIPANT_FIELDS = ['treatment', 'start_time', 'end_time', 'time_before_tasks', 'time_taken',

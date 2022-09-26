@@ -1,6 +1,7 @@
 from otree.api import *
 from Global_Functions import Binary_Choice_List, Likert_Familiarity_List
 import time
+import settings
 
 doc = """
 The app that introduces subjects to the experiment
@@ -75,6 +76,7 @@ def creating_session(subsession):
         player.participant.sample_meal_time = player.session.config["sample_meal_time"]
         player.participant.sample_meal_date = player.session.config["sample_meal_date"]
         player.participant.payoff = 0  # initialise payoff value
+        player.session.label = player.session.config['session_label']
 
 
 # PAGES
@@ -110,3 +112,17 @@ class InformationSheet(Page):
 
 
 page_sequence = [SonaID, InformationSheet, Introduction]
+
+
+def custom_export(players):
+    yield ['participant_code', 'participant_label', 'session_label',
+           'agreement', 'name']
+
+    for player in players:
+        participant = player.participant
+        for field in settings.PARTICIPANT_FIELDS:  # Custom Export doesn't like empty fields
+            if field not in participant.vars:
+                if field not in ['lc1a', 'pair', 'stage', 'task_to_complete', 'opt_choice1', 'opt_choice2']:
+                    setattr(participant, field, None)
+        yield [participant.code, participant.label, participant.session.label,
+               player.agreement, player.name]

@@ -1,0 +1,130 @@
+
+<style>
+    .mgslider-wrapper {
+        border-spacing: 10px;
+    }
+    .mgslider-row {
+      border-color: #FFFFFF;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      overflow: hidden;
+      padding: 10px 5px;
+      word-break: normal;
+
+    }
+    .mgslider-tbody {
+        border-color: #888;
+    }
+    .mgslider-show {
+        text-align: center;
+        padding-left: 10px;
+    }
+    .mgslider-limit {
+        width: 10%;
+        min-width: 75px;
+        height: 40px;
+        margin: 100px;
+        text-align: center;
+        background: #eee;
+        border: 0px solid #888;
+    }
+    .mgslider-limit, .mgslider-value {
+        font-variant-numeric: tabular-nums;
+    }
+    .mgslider-before {
+        height: 16px;
+        width: 100%;
+        background: #1e5bff;
+    }
+    .mgslider-feedback {
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+</style>
+
+<style type="text/css">
+  .tg {
+      border-spacing: 0;
+  }
+
+  .tg {
+      border-color: black;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      overflow: hidden;
+      padding: 10px 5px;
+      word-break: normal;
+  }
+
+  .tg th {
+      border-color: black;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      overflow: hidden;
+      padding: 10px 5px;
+      word-break: normal;
+  }
+
+  .tg .tg-baqh {
+      text-align: center;
+      vertical-align: top
+      border-color: black;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      overflow: hidden;
+      padding: 10px 5px;
+      word-break: normal;
+  }
+</style>
+
+
+
+<p>Click the blue bars to reveal the sliders.</p>
+
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-baqh">Left option</th>
+    <th class="tg-baqh">Right option</th>
+    <th class="tg-baqh">Probability you receive left option</th>
+  </tr>
+</thead>
+<tbody>
+
+{{ for q in question_list }}
+  {{formfield_errors q.number}}
+  <tr>
+    <td class="tg-baqh">{{Task_name}} </td>
+    <td class="tg-baqh"> ${{q.payment_amount}} </td>
+    <td width="75%" class="tg-baqh" >
+      <div id="{{q.number}}">
+
+        <script src="{{ static 'mgslider.js' }}"></script>
+
+        <script>
+            $(document).ready(function (event) {
+                slider2 = new mgslider("{{q.number}}", 0, 100, 10);
+                slider2.recall = true; // Optional line to remember value across errors
+                slider2.print(document.getElementById("{{q.number}}"));
+                 });
+        </script>
+      </div>
+     </td>
+  </tr>
+
+{{ endfor }}
+</tbody>
+</table>
+

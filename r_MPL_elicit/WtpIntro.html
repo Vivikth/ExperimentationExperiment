@@ -1,0 +1,24 @@
+{{ block title }}
+    {{ Constants.Stage_Title }}
+{{ endblock }}
+
+{{ block content }}
+
+<p>
+    In this stage of the experiment, we will determine how much you value each meal. <br>
+    We will use the switch-point procedure to determine how much you value each meal based on its description. <br>
+    There is a <b>20%</b> chance that one of the switch-point procedure questions in this stage will be selected for payment. <br>
+    The information about the switch-point procedure is at the bottom of the page if you'd like to refer back to it. <br>
+    Press the next button to continue.
+</p>
+
+    {{ next_button }}
+
+<br>
+<br>
+
+<h2> Switch-Point Procedure Information</h2>
+
+{{ include 'BDM/BDM_Info_ShowHide.html' }}
+
+{{ endblock }}

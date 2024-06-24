@@ -1,0 +1,218 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{{ block title }}
+Applying the Switch-Point Procedure
+{{ endblock }}
+
+
+{% block scripts %}
+
+<script src="{% static 'back_button_v2/js/prev_next_button.js' %}"></script>
+
+{% endblock %}
+
+
+{% block styles %}
+
+<link href="{% static 'back_button_v2/css/custom.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Tab navigation -->
+<ul class="nav nav-tabs fixed-top navbar-light bg-light justify-content-center " id="myTab" role="tablist">
+  
+
+  <li class="nav-item" >
+    <a class="nav-link active" id="part1-tab" data-toggle="tab" href="#part1" role="tab" aria-controls="part1" onclick="topFunction()"> Tab 1
+</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="part2-tab" data-toggle="tab" href="#part2" role="tab" aria-controls="part2" onclick="topFunction()">Tab 2</a>
+  </li>
+
+
+<li class="nav-item">
+    <a class="nav-link" id="part3-tab" data-toggle="tab" href="#part3" role="tab" aria-controls="part3" onclick="topFunction()">Tab 3</a>
+  </li>
+
+
+<li class="nav-item">
+    <a class="nav-link" id="part4-tab" data-toggle="tab" href="#part4" role="tab" aria-controls="part4" onclick="topFunction()">Tab 4</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" id="part5-tab" data-toggle="tab" href="#part5" role="tab" aria-controls="part5" onclick="topFunction()">Tab 5</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" id="part6-tab" data-toggle="tab" href="#part6" role="tab" aria-controls="part6" onclick="topFunction()">Tab 6</a>
+  </li>
+
+</ul>
+
+
+
+<!-- Tab content -->
+<div class="tab-content" id="myTabContent">
+
+  <div class="tab-pane show active" id="part1" role="tabpanel" aria-labelledby="part1-tab">
+            {{ with Task_name='Meal 1: Sandwiches, Wraps and Uncrustables' }}
+                {{with Task_description='A variety of rolls, tri-colour wraps and uncrustables, plus a fruit skewer' }}
+                {{with Allergen_information='Contains wheat, gluten, dairy; may contain traces of nuts' }}
+                {{with Meal_number='Meal 1'}}
+                    {{with question_list=fp_question_list}}
+                        {{ include 'r_MPL_elicit/PrefElicit.html'}}
+                    {{ endwith }}
+                {{ endwith }}
+                {{ endwith }}
+                {{ endwith }}
+            {{endwith}}
+
+            {{ with Form_Value=form.Fancy_Pizza_Value }}
+                <label style="font-size: 20px">  {{Form_Value.label }}</label>
+                <div class="form-group">
+                    <label style="text-align: right">$</label>
+                        <input type="number" step="any" id="fancy_pizza_form" name="Fancy_Pizza_Value" min="0" oninput="this.value =
+                                    !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+                {{ formfield_errors 'Fancy_Pizza_Value' }}
+            {{endwith}}
+
+            {{ include 'Task_WTP/Are_You_Sure.html' }}
+      <button type="button" hidden onclick="topFunction()" id="fancy_pizza_next_hidden" class="nexttab fancy_pizza_form"></button>
+      <button onclick="checkSubmit(this)" type="button" id="fancy_pizza_next" name="fancy_pizza_form" class="btn-primary btn next">Next</button>
+  </div>
+
+  <div class="tab-pane" id="part2" role="tabpanel" aria-labelledby="part2-tab">
+            {{ with Task_name='Meal 2: Hot Assorted Tarts' }}
+                {{with Task_description='Hot assorted tarts, Moroccan orange salad, spicy pineapple coleslaw, plus fruit platter' }}
+                {{with Allergen_information='Contains wheat, gluten, dairy, egg, onion, garlic; may contain traces of nuts' }}
+                {{with Meal_number='Meal 2'}}
+                    {{with question_list=cp_question_list}}
+                        {{ include 'r_MPL_elicit/PrefElicit.html'}}
+                    {{ endwith }}
+                {{ endwith }}
+                {{ endwith }}
+                {{ endwith }}
+            {{endwith}}
+
+            {{ with Form_Value=form.Cheap_Pizza_Value }}
+                <label style="font-size: 20px">  {{Form_Value.label }}</label>
+                <div class="form-group">
+                    <label style="text-align: right">$</label>
+                        <input type="number" step="any" id="cheap_pizza_form" name="Cheap_Pizza_Value" min="0" oninput="this.value =
+                                    !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+                {{ formfield_errors 'Cheap_Pizza_Value' }}
+            {{endwith}}
+
+            {{ include 'Task_WTP/Are_You_Sure.html' }}
+          <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+      <button type="button" hidden onclick="topFunction()" id="cheap_pizza_next_hidden" class="nexttab cheap_pizza_form"></button>
+      <button onclick="checkSubmit(this)" type="button" id="cheap_pizza_next" name="cheap_pizza_form" class="btn-primary btn next">Next</button>
+  </div>
+
+
+  <div class="tab-pane" id="part3" role="tabpanel" aria-labelledby="part3-tab">
+            {{ with Task_name='Meal 3: Individual Salads/Rice Paper Rolls' }}
+                {{with Task_description='Rice paper rolls, salad, plus a cookie' }}
+                {{with Allergen_information='May contain wheat, gluten, dairy, nuts, onion, garlic' }}
+                {{with Meal_number='Meal 3'}}
+
+                    {{with question_list=ft_question_list}}
+                        {{ include 'r_MPL_elicit/PrefElicit.html'}}
+                    {{ endwith }}
+                {{ endwith }}
+                {{ endwith }}
+                {{ endwith }}
+            {{endwith}}
+
+            {{ with Form_Value=form.Fancy_Taco_Value }}
+                <label style="font-size: 20px">  {{Form_Value.label }}</label>
+                <div class="form-group">
+                    <label style="text-align: right">$</label>
+                        <input type="number" step="any" id="fancy_taco_form" name="Fancy_Taco_Value" min="0" oninput="this.value =
+                                    !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+                {{ formfield_errors 'Fancy_Taco_Value' }}
+            {{endwith}}
+
+            {{ include 'Task_WTP/Are_You_Sure.html' }}
+          <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+      <button type="button" hidden onclick="topFunction()" id="fancy_taco_next_hidden" class="nexttab fancy_taco_form"></button>
+      <button onclick="checkSubmit(this)" type="button" id="fancy_taco_next" name="fancy_taco_form" class="btn-primary btn next">Next</button>
+  </div>
+
+  <div class="tab-pane" id="part4" role="tabpanel" aria-labelledby="part4-tab">
+            {{ with Task_name='Meal 4: Hot Fork Dishes' }}
+                {{with Task_description='Curry, rice, garden salad plus a fruit skewer' }}
+                {{with Allergen_information='Contains onion, garlic; may contain traces of nuts' }}
+                {{with Meal_number='Meal 4'}}
+                    {{with question_list=ct_question_list}}
+                        {{ include 'r_MPL_elicit/PrefElicit.html'}}
+                    {{ endwith }}
+                {{ endwith }}
+                {{ endwith }}
+                {{ endwith }}
+            {{endwith}}
+
+            {{ with Form_Value=form.Cheap_Taco_Value }}
+                <label style="font-size: 20px">  {{Form_Value.label }}</label>
+                <div class="form-group">
+                    <label style="text-align: right">$</label>
+                        <input type="number" step="any" id="cheap_taco_form" name="Cheap_Taco_Value" min="0" oninput="this.value =
+                                    !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+                {{ formfield_errors 'Cheap_Taco_Value' }}
+            {{endwith}}
+
+            {{ include 'Task_WTP/Are_You_Sure.html' }}
+          <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+      <button type="button" hidden onclick="topFunction()" id="cheap_taco_next_hidden" class="nexttab cheap_taco_form"></button>
+      <button onclick="checkSubmit(this)" type="button" id="cheap_taco_next" name="cheap_taco_form" class="btn-primary btn next">Next</button>
+  </div>
+
+
+ <div class="tab-pane" id="part6" role="tabpanel" aria-labelledby="part6-tab">
+
+<h3>Thank you for providing your switch-points.</h3>
+
+<p>
+The given switch-points indicate that you rank the foods in the following order:
+</p>
+     <ol>
+         <li> <span id="Task1"></span>  </li>
+         <li> <span id="Task2"></span>  </li>
+         <li> <span id="Task3"></span>  </li>
+         <li> <span id="Task4"></span>  </li>
+     </ol>
+<p>
+    If you agree with this ranking, press the next button to continue. <br>
+    Otherwise, you can use the back buttons to change your switch-points.
+</p>
+
+<details>
+    <summary> Click this text to show / hide the descriptions of the meals</summary>
+    {{ include 'Choice/Food_Descriptions.html'}}
+
+</details>
+
+    <button onclick="topFunction()" type="button" class="prevtab btn-primary btn back">Back</button>
+<button class="nexttab btn-primary btn next">Next</button>
+  </div>
+
+</div>
+<br> <br> <br> <br> <br>
+<h2> Switch-Point Procedure Information</h2>
+
+    {{ include 'BDM/BDM_Info_ShowHide.html' }}
+
+
+{% endblock %}
+
+
+

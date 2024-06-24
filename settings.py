@@ -13,6 +13,13 @@ SESSION_CONFIGS = [
         next_session="test"
     ),
     dict(
+        name='r_MPL',
+        display_name='r_MPL',
+        num_demo_participants=1,
+        app_sequence=['r_MPL_elicit'],
+        next_session="test"
+    ),
+    dict(
         name='BDM',
         display_name='BDM',
         num_demo_participants=1,
